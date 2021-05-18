@@ -1,0 +1,2697 @@
+{UTF-8}
+People dying at home[Age groups,In isolation,"Risk-type","vacc-type"]=
+	DELAY3I((People getting sick[Age groups,In isolation,"Risk-type","vacc-type"]+People getting sick\
+		[Age groups,not isolated
+	,"Risk-type","vacc-type"]*"self-isolating")*DfromDH, "average-time-tobe-infectious-toDead"
+	,(Infectious symptomatic[Age groups,In isolation,"Risk-type","vacc-type"]*initial perc of infsymp dead\
+		[Age groups,In isolation,"Risk-type","vacc-type"])/("average-time-tobe-infectious-toDead"
+	-"when-symptoms-if-I"
+	)) ~~|
+People dying at home[Age groups,not isolated,"Risk-type","vacc-type"]=
+	DELAY3I(People getting sick[Age groups,not isolated,"Risk-type","vacc-type"]*(1-"self-isolating"\
+		)*DfromDH, "average-time-tobe-infectious-toDead"
+	,(Infectious symptomatic[Age groups,not isolated,"Risk-type","vacc-type"]*initial perc of infsymp dead\
+		[Age groups,not isolated,"Risk-type","vacc-type"])/("average-time-tobe-infectious-toDead"
+	-"when-symptoms-if-I"
+	))
+	~	People/Day
+	~		|
+
+Infection becomes severe[Age groups,In isolation,"Risk-type","vacc-type"]=
+	DELAY3I((People getting sick[Age groups,In isolation,"Risk-type","vacc-type"]+People getting sick\
+		[Age groups,not isolated
+	,"Risk-type","vacc-type"]*"self-isolating")*(1-DfromDH),"average-time-tobe-infectious-toHospital"
+	,(Infectious symptomatic[Age groups,In isolation,"Risk-type","vacc-type"]*initial perc of infsymp hosp\
+		[Age groups,In isolation,"Risk-type","vacc-type"])/("average-time-tobe-infectious-toHospital"\
+		-"when-symptoms-if-I")
+	) ~~|
+Infection becomes severe[Age groups,not isolated,"Risk-type","vacc-type"]=
+	DELAY3I(People getting sick[Age groups,not isolated,"Risk-type","vacc-type"]*(1-"self-isolating"\
+		)*(1-DfromDH),"average-time-tobe-infectious-toHospital"
+	,(Infectious symptomatic[Age groups,not isolated,"Risk-type","vacc-type"]*initial perc of infsymp hosp\
+		[Age groups,not isolated,"Risk-type","vacc-type"])/("average-time-tobe-infectious-toHospital"\
+		-"when-symptoms-if-I")
+	)
+	~	People/Day
+	~		|
+
+Recover symptomatic[Age groups,In isolation,"Risk-type","vacc-type"]=
+	DELAY3I(People getting slight symptoms[Age groups,not isolated,"Risk-type","vacc-type"\
+		]*"self-isolating"+People getting slight symptoms
+	[Age groups,In isolation,"Risk-type","vacc-type"],
+	"average-time-tobe-infectious-toImmune",Infectious symptomatic[Age groups,In isolation\
+		,"Risk-type","vacc-type"]*initial perc of infsymp recover[Age groups,In isolation,"Risk-type"\
+		,"vacc-type"]/("average-time-tobe-infectious-toImmune"-"when-symptoms-if-I"))+People needing hospital recovering at home
+	[Age groups,In isolation,"Risk-type","vacc-type"] ~~|
+Recover symptomatic[Age groups,not isolated,"Risk-type","vacc-type"]=
+	DELAY3I(People getting slight symptoms[Age groups,not isolated,"Risk-type","vacc-type"\
+		]*(1-"self-isolating"),"average-time-tobe-infectious-toImmune"
+	,Infectious symptomatic[Age groups,not isolated,"Risk-type","vacc-type"]*initial perc of infsymp recover\
+		[Age groups,not isolated,"Risk-type","vacc-type"]/("average-time-tobe-infectious-toImmune"\
+		-"when-symptoms-if-I"))+People needing hospital recovering at home
+	[Age groups,not isolated,"Risk-type","vacc-type"]
+	~	People/Day
+	~		|
+
+initial perc of infsymp dead[Age groups,Actual isolation,"Risk-type","vacc-type"]=
+	1-(initial perc of infsymp hosp[Age groups,Actual isolation,"Risk-type","vacc-type"]\
+		+initial perc of infsymp recover[Age groups,Actual isolation,"Risk-type","vacc-type"\
+		])
+	~	Dmnl
+	~		|
+
+initial perc of infsymp hosp["0",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+initial perc of infsymp hosp["0",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+initial perc of infsymp hosp["0",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+initial perc of infsymp hosp["0",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+initial perc of infsymp hosp["1",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+initial perc of infsymp hosp["1",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+initial perc of infsymp hosp["1",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+initial perc of infsymp hosp["1",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+initial perc of infsymp hosp["2",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+initial perc of infsymp hosp["2",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+initial perc of infsymp hosp["2",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+initial perc of infsymp hosp["2",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+initial perc of infsymp hosp["0",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+initial perc of infsymp hosp["0",not isolated,"High-risk","non-vaccinated"]=
+	0.277277 ~~|
+initial perc of infsymp hosp["0",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+initial perc of infsymp hosp["0",not isolated,"Low-risk","non-vaccinated"]=
+	0.077842 ~~|
+initial perc of infsymp hosp["1",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+initial perc of infsymp hosp["1",not isolated,"High-risk","non-vaccinated"]=
+	0.277277 ~~|
+initial perc of infsymp hosp["1",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+initial perc of infsymp hosp["1",not isolated,"Low-risk","non-vaccinated"]=
+	0.077842 ~~|
+initial perc of infsymp hosp["2",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+initial perc of infsymp hosp["2",not isolated,"High-risk","non-vaccinated"]=
+	0.277277 ~~|
+initial perc of infsymp hosp["2",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+initial perc of infsymp hosp["2",not isolated,"Low-risk","non-vaccinated"]=
+	0.077842
+	~	Dmnl
+	~		|
+
+initial perc of infsymp recover["0",In isolation,"High-risk",vaccinated]=
+	1 ~~|
+initial perc of infsymp recover["0",In isolation,"High-risk","non-vaccinated"]=
+	1 ~~|
+initial perc of infsymp recover["0",In isolation,"Low-risk",vaccinated]=
+	1 ~~|
+initial perc of infsymp recover["0",In isolation,"Low-risk","non-vaccinated"]=
+	1 ~~|
+initial perc of infsymp recover["1",In isolation,"High-risk",vaccinated]=
+	1 ~~|
+initial perc of infsymp recover["1",In isolation,"High-risk","non-vaccinated"]=
+	1 ~~|
+initial perc of infsymp recover["1",In isolation,"Low-risk",vaccinated]=
+	1 ~~|
+initial perc of infsymp recover["1",In isolation,"Low-risk","non-vaccinated"]=
+	1 ~~|
+initial perc of infsymp recover["2",In isolation,"High-risk",vaccinated]=
+	1 ~~|
+initial perc of infsymp recover["2",In isolation,"High-risk","non-vaccinated"]=
+	1 ~~|
+initial perc of infsymp recover["2",In isolation,"Low-risk",vaccinated]=
+	1 ~~|
+initial perc of infsymp recover["2",In isolation,"Low-risk","non-vaccinated"]=
+	1 ~~|
+initial perc of infsymp recover["0",not isolated,"High-risk",vaccinated]=
+	1 ~~|
+initial perc of infsymp recover["0",not isolated,"High-risk","non-vaccinated"]=
+	0.675586 ~~|
+initial perc of infsymp recover["0",not isolated,"Low-risk",vaccinated]=
+	1 ~~|
+initial perc of infsymp recover["0",not isolated,"Low-risk","non-vaccinated"]=
+	0.908925 ~~|
+initial perc of infsymp recover["1",not isolated,"High-risk",vaccinated]=
+	1 ~~|
+initial perc of infsymp recover["1",not isolated,"High-risk","non-vaccinated"]=
+	0.675586 ~~|
+initial perc of infsymp recover["1",not isolated,"Low-risk",vaccinated]=
+	1 ~~|
+initial perc of infsymp recover["1",not isolated,"Low-risk","non-vaccinated"]=
+	0.908925 ~~|
+initial perc of infsymp recover["2",not isolated,"High-risk",vaccinated]=
+	1 ~~|
+initial perc of infsymp recover["2",not isolated,"High-risk","non-vaccinated"]=
+	0.675586 ~~|
+initial perc of infsymp recover["2",not isolated,"Low-risk",vaccinated]=
+	1 ~~|
+initial perc of infsymp recover["2",not isolated,"Low-risk","non-vaccinated"]=
+	0.908925
+	~	Dmnl
+	~		|
+
+Hospitalisation[Age groups,Actual isolation,"Risk-type","vacc-type"]=
+	Infection becomes severe[Age groups,Actual isolation,"Risk-type","vacc-type"]*"perc-people-going-toHospital"
+	~	People/Day
+	~		|
+
+"Decrease week-E"=
+	Normal decrease week E + lookup decrease week E(Time)
+	~	People/Day
+	~		|
+
+incidence=
+	"Increase week-E"/(SUM("total-population"[Age groups!,"Risk-type"!,"vacc-type"!])+"total-dead"\
+		)
+	~	Dmnl/Day
+	~		|
+
+Susceptible[Age groups,"Risk-type","vacc-type"]= INTEG (
+	Lose immunity[Age groups,"Risk-type","vacc-type"]-SUM(Exposing[Age groups,Actual isolation\
+		!,"Risk-type","vacc-type"]),
+		Initial Susceptible[Age groups,"Risk-type","vacc-type"])
+	~	People
+	~		|
+
+lookup decrease week E(
+	[(0,0)-(10,10)],(1,10),(5,5),(10,0))
+	~	People/Day
+	~		|
+
+impact=
+	1-episodeless susceptible/SUM("total-population"[Age groups!,"Risk-type"!,"vacc-type"\
+		!]+"total-dead")
+	~	Dmnl
+	~		~	:SUPPLEMENTARY 
+	|
+
+Normal decrease week E= DELAY FIXED (
+	"Increase week-E",week,0)
+	~	People/Day
+	~		|
+
+Uncertain=
+	0
+	~	Dmnl
+	~		|
+
+"vaccine-efficacy-S"["vacc-type"]=
+	0.7,0
+	~	Dmnl
+	~		|
+
+"non-iso population"[Age groups,"Risk-type","vacc-type"]=
+	(Critical care[Age groups,"Risk-type","vacc-type"]+Hospitalised[Age groups,"Risk-type"\
+		,"vacc-type"]+Exposed[Age groups,In isolation,"Risk-type","vacc-type"]+ Infectious[\
+		Age groups,In isolation,"Risk-type","vacc-type"])*(1-"isolation-efficacy")+Susceptible\
+		[Age groups,"Risk-type","vacc-type"]+Immune[Age groups,"Risk-type","vacc-type"]+Exposed\
+		[Age groups,not isolated,"Risk-type","vacc-type"]+Infectious[Age groups,not isolated\
+		,"Risk-type","vacc-type"]
+	~	People
+	~		|
+
+Exposed[Age groups,not isolated,"Risk-type","vacc-type"]= INTEG (
+	Exposing[Age groups,not isolated,"Risk-type","vacc-type"]-Becomming infectious asymptomatic\
+		[Age groups,not isolated,"Risk-type"
+	,"vacc-type"]-Becomming infectious symptomatic[Age groups,not isolated,"Risk-type","vacc-type"\
+		]-Getting informed of infection
+	[Age groups,"Risk-type","vacc-type"],
+		Initial Exposed[Age groups,not isolated,"Risk-type","vacc-type"]) ~~|
+Exposed[Age groups,In isolation,"Risk-type","vacc-type"]= INTEG (
+	Exposing[Age groups,In isolation,"Risk-type","vacc-type"]+Getting informed of infection\
+		[Age groups,"Risk-type","vacc-type"
+	]-Becomming infectious asymptomatic[Age groups,In isolation,"Risk-type","vacc-type"]\
+		-Becomming infectious symptomatic[Age groups
+	,In isolation,"Risk-type","vacc-type"],
+		Initial Exposed[Age groups,In isolation,"Risk-type","vacc-type"])
+	~	People
+	~		|
+
+"prop-risk"["High-risk"]=
+	"prop-high-risk" ~~|
+"prop-risk"["Low-risk"]=
+	1-"prop-high-risk"
+	~	Dmnl
+	~		|
+
+"prop-high-risk"=
+	0.04
+	~	Dmnl
+	~		|
+
+Mix R0=
+	(1-(1-"transmission-parameter"*people unit correction)^(I days/day unit correction))\
+		*("pp-patch"-1)
+	~	Dmnl
+	~		|
+
+day unit correction=
+	1
+	~	Day
+	~		|
+
+"check-triggered?"=
+	IF THEN ELSE("trigger-type" = 0, 1, 
+	IF THEN ELSE("trigger-type" = 1 :AND: Time/day unit correction >= "trigger-level" -1\
+		,1,
+	IF THEN ELSE("trigger-type" = 2 :AND: "total-hosp+crit"/people unit correction >= "trigger-level"\
+		,1,
+	IF THEN ELSE("trigger-type" = 3 :AND: "tot-n-exposed"/people unit correction>="trigger-level"\
+		,1,0))))
+	~	Dmnl
+	~		|
+
+people unit correction=
+	1
+	~	People
+	~		|
+
+"recent-HR-iso"["High-risk"]=
+	IF THEN ELSE("time-triggered"+ "triggered?"=0:OR: "high-risk-shielding?" =0,0,PULSE(\
+		"begin-trigger","HR-shield-duration"*Days per week)) ~~|
+"recent-HR-iso"["Low-risk"]=
+	0
+	~	Dmnl
+	~		|
+
+walking=
+	IF THEN ELSE("triggered?"=1,"prop-move-short"*"move-short-impact"*(1-"move-reduction-short"\
+		)+"prop-move-long"*"move-long-impact"*(1-"move-reduction-long"
+	),"prop-move-short"*"move-short-impact"+"prop-move-long"*"move-long-impact")
+	~	Dmnl/Day
+	~		|
+
+"effective-R"=
+	ZIDZ("week-E"*I days,week*"total-infectious")
+	~	Dmnl
+	~		~	:SUPPLEMENTARY 
+	|
+
+"admissions-critical"=
+	SUM(Condition worsens[Age groups!,"Risk-type"!,"vacc-type"!])
+	~	People/Day
+	~		|
+
+"admissions-hospital"=
+	SUM(Hospitalisation[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!])
+	~	People/Day
+	~		|
+
+"new-D"=
+	SUM(People dying[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!])
+	~	People/Day
+	~		~	:SUPPLEMENTARY 
+	|
+
+"Community IFR%"=
+	100*"prob-InfDeath"
+	~	Dmnl
+	~		~	:SUPPLEMENTARY 
+	|
+
+"total-dead"=
+	SUM(Dead[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!])
+	~	People
+	~		~	:SUPPLEMENTARY 
+	|
+
+"total-hosp+crit"=
+	"total-critical"+"total-hospitalised"
+	~	People
+	~		|
+
+HC LoS=
+	ZIDZ("tot-days-hospcrit","tot-n-hospcrit")
+	~	Day
+	~		~	:SUPPLEMENTARY 
+	|
+
+"total-infectious"=
+	SUM(Infectious[Age groups!,Actual isolation!,"Risk-type"!
+	,"vacc-type"!])
+	~	People
+	~		|
+
+tot days hospcrit increase=
+	"admissions-hospital"*(1-("prob-HospCrit"+"prob-HospDeath"))*"average-time-tobe-hospital-toImmune"\
+		+"admissions-hospital"
+	*"prob-HospDeath"*"average-time-tobe-hospital-toDead"+"average-time-tobe-hospital-toCritical"\
+		*"admissions-hospital"*"prob-HospCrit"+"admissions-critical"*"prob-CritDeath"*"average-time-tobe-critical-toDead"\
+		+"admissions-critical"*(1-"prob-CritDeath")*"average-time-tobe-critical-toImmune"
+	~	People
+	~		|
+
+"Hospital IFR%"=
+	100*("prob-HospDeath"+"prob-HospCrit"*"prob-CritDeath")
+	~	Dmnl
+	~		|
+
+"initial tot-n-hospcrit"=
+	0
+	~	People
+	~		|
+
+"CFR%"=
+	"Overall IFR%"/(1-"mild-asymptomatic"+"prob-InfHosp"*"mild-asymptomatic")
+	~	Dmnl
+	~		~	:SUPPLEMENTARY 
+	|
+
+I days=
+	ZIDZ("tot-days-infectious","tot-n-infectious")
+	~	Day
+	~		|
+
+"pp-patch"=
+	12
+	~	Dmnl
+	~		|
+
+"tot-n-hospcrit"= INTEG (
+	"admissions-hospital",
+		"initial tot-n-hospcrit")
+	~	People
+	~		|
+
+"prevalence-I"=
+	("total-infectious"+"total-hosp+crit")/SUM("total-population"[Age groups
+	!,"Risk-type"!,"vacc-type"!])
+	~	Dmnl
+	~		~	:SUPPLEMENTARY 
+	|
+
+"new-R"=
+	SUM(Recover at home[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!]+Recover from general wards\
+		[Age groups!,"Risk-type"!,"vacc-type"!]+Recover from critical care[Age groups!,"Risk-type"\
+		!,"vacc-type"!]+Recover symptomatic[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"\
+		!])
+	~	People/Day
+	~		~	:SUPPLEMENTARY 
+	|
+
+"total-critical"=
+	SUM(Critical care[Age groups!,"Risk-type"!,"vacc-type"!])
+	~	People
+	~		|
+
+"Overall IFR%"=
+	100*("prob-InfDeath"+"prob-InfHosp"*"Hospital IFR%"/100)
+	~	Dmnl
+	~		|
+
+"total-hospitalised"=
+	SUM(Hospitalised[Age groups!,"Risk-type"!,"vacc-type"!])
+	~	People
+	~		|
+
+"tot-days-exposed"=
+	"average-time-tobe-exposed"*"tot-n-exposed"
+	~	People*Day
+	~		|
+
+"tot-days-hospcrit"= INTEG (
+	tot days hospcrit increase,
+		"initial tot-days-hospcrit")
+	~	People*Day
+	~		|
+
+E days=
+	ZIDZ("tot-days-exposed","tot-n-exposed")
+	~	Day
+	~		~	:SUPPLEMENTARY 
+	|
+
+"prevalence-all"=
+	(SUM(Exposed[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!])+"total-infectious"\
+		+"total-hosp+crit")/SUM("total-population"[Age groups!,"Risk-type"!,"vacc-type"!])
+	~	Dmnl
+	~		|
+
+"initial tot-days-hospcrit"=
+	0
+	~	People*Day
+	~		|
+
+initial episodeless susceptible=
+	20171
+	~	People
+	~		|
+
+episodeless susceptible= INTEG (
+	-decreae episodeless suceptible,
+		initial episodeless susceptible)
+	~	People
+	~		|
+
+"max-incidence"=SAMPLE IF TRUE(
+	incidence>"max-incidence",incidence,incidence)
+	~	Dmnl/Day
+	~		~	:SUPPLEMENTARY 
+	|
+
+decreae episodeless suceptible=
+	perc of episodeless*"Increase week-E"
+	~	People/Day
+	~		|
+
+perc of episodeless=
+	episodeless susceptible/(episodeless susceptible+lost immunity)
+	~	Dmnl
+	~		|
+
+increase lost immunity=
+	SUM(Lose immunity[Age groups!,"Risk-type"!,"vacc-type"!])
+	~	People/Day
+	~		|
+
+lost immunity= INTEG (
+	increase lost immunity-decrease lost immunity,
+		SUM(Initial Susceptible[Age groups!,"Risk-type"!,"vacc-type"!])-initial episodeless susceptible\
+		)
+	~	People
+	~		|
+
+"max-prevalance-all"=
+	SAMPLE IF TRUE("prevalence-all"> "max-prevalance-all","prevalence-all","prevalence-all"\
+		)
+	~	Dmnl
+	~		~	:SUPPLEMENTARY 
+	|
+
+decrease lost immunity=
+	"Increase week-E"*(1-perc of episodeless)
+	~	People/Day
+	~		|
+
+Initial week E=
+	0
+	~	People
+	~		|
+
+"tot-n-infectious"= INTEG (
+	"new-I",
+		"initial tot-n-infectious")
+	~	People
+	~		|
+
+"Increase tot-days-infectious"=
+	(SUM(Becomming infectious asymptomatic[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"\
+		!])+SUM(People getting slight symptoms[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"\
+		!]))*"average-time-tobe-infectious-toImmune"+SUM(People getting sick[Age groups!,Actual isolation\
+		!,"Risk-type"!,"vacc-type"!])*DfromDH*"average-time-tobe-infectious-toDead"+SUM(People getting sick\
+		[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!])*(1-DfromDH)*"average-time-tobe-infectious-toHospital"
+	~	People
+	~		|
+
+"Increase week-E"=
+	SUM(Exposing[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!])
+	~	People/Day
+	~		|
+
+"new-I"=
+	SUM(Becomming infectious asymptomatic[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"\
+		!])+SUM(Becomming infectious symptomatic[Age groups!,Actual isolation!,"Risk-type"!\
+		,"vacc-type"!])
+	~	People/Day
+	~		|
+
+week=
+	7
+	~	Day
+	~		|
+
+"tot-days-infectious"= INTEG (
+	"Increase tot-days-infectious",
+		"initial tot-days-infectious")
+	~	People*Day
+	~		|
+
+"week-E"= INTEG (
+	"Increase week-E"-"Decrease week-E",
+		Initial week E)
+	~	People
+	~		|
+
+"initial tot-n-infectious"=
+	0
+	~	People
+	~		|
+
+"initial tot-days-infectious"=
+	0
+	~	People*Day
+	~		|
+
+Actual isolation:
+	In isolation,not isolated
+	~	
+	~		|
+
+"average-time-tobe-infectious"["Risk-type"]=
+	SUM(Previous infectious transmitter distr[Age groups!,Actual isolation!,"Risk-type",\
+		"vacc-type"!])*"prob-DH"["Risk-type"]*DfromDH*"average-time-tobe-infectious-toDead"\
+		+SUM(Previous infectious transmitter distr[Age groups!,Actual isolation!,"Risk-type"\
+		,"vacc-type"!])*"prob-DH"["Risk-type"]*(1-DfromDH)*"average-time-tobe-infectious-toHospital"\
+		+SUM(Previous infectious transmitter distr[Age groups!,Actual isolation!,"Risk-type"\
+		,"vacc-type"!])*(1-"prob-DH"["Risk-type"])*"average-time-tobe-infectious-toImmune"
+	~	Day
+	~		~	:SUPPLEMENTARY 
+	|
+
+People getting sick[Age groups,not isolated,"Risk-type","vacc-type"]=
+	DELAY3I(Exposing[Age groups,not isolated,"Risk-type","vacc-type"]*(1-Chance of being informed on becomming symptomatic\
+		[Age groups,"Risk-type","vacc-type"])*"prob-DH"["Risk-type"
+	],"average-time-tobe-exposed",(Exposed[Age groups
+	,not isolated,"Risk-type","vacc-type"]*"prob-DH"["Risk-type"])*(1-Chance of being informed on becomming symptomatic\
+		[Age groups,"Risk-type","vacc-type"])/"average-time-tobe-exposed") ~~|
+People getting sick[Age groups,In isolation,"Risk-type","vacc-type"]=
+	DELAY3I(Exposing[Age groups,In isolation,"Risk-type","vacc-type"]*"prob-DH"["Risk-type"
+	],"average-time-tobe-exposed",(Exposed[Age groups
+	,In isolation,"Risk-type","vacc-type"]*"prob-DH"["Risk-type"])/"average-time-tobe-exposed"\
+		)+
+	DELAY3(Getting informed of infection[Age groups,"Risk-type","vacc-type"]*"prob-DH"["Risk-type"\
+		],"average-time-tobe-exposed"-"when-symptoms-if-I")
+	~	People/Day
+	~		|
+
+People getting slight symptoms[Age groups,not isolated,"Risk-type","vacc-type"]=
+	DELAY3I(Exposing[Age groups,not isolated,"Risk-type","vacc-type"]*(1-Chance of being informed on becomming symptomatic\
+		[Age groups,"Risk-type","vacc-type"])*(1-"prob-DH"["Risk-type"
+	])*(1-"mild-asymptomatic"),"average-time-tobe-exposed",(Exposed[Age groups
+	,not isolated,"Risk-type","vacc-type"]*(1-"prob-DH"["Risk-type"])*(1-"mild-asymptomatic"\
+		)*(1-Chance of being informed on becomming symptomatic[Age groups,"Risk-type","vacc-type"\
+		]))/"average-time-tobe-exposed") ~~|
+People getting slight symptoms[Age groups,In isolation,"Risk-type","vacc-type"]=
+	DELAY3I(Exposing[Age groups,In isolation,"Risk-type","vacc-type"]*(1-"prob-DH"["Risk-type"
+	])*(1-"mild-asymptomatic"),"average-time-tobe-exposed",(Exposed[Age groups
+	,In isolation,"Risk-type","vacc-type"]*(1-"mild-asymptomatic")*(1-"prob-DH"["Risk-type"\
+		]))/"average-time-tobe-exposed")+
+	DELAY3(Getting informed of infection[Age groups,"Risk-type","vacc-type"]*(1-"mild-asymptomatic"\
+		)*(1-"prob-DH"["Risk-type"]),"average-time-tobe-exposed"-"when-symptoms-if-I")
+	~	People/Day
+	~		|
+
+Chance of being informed on infection[Age groups,"Risk-type","vacc-type"]=
+	"informer?"*Perc of symptomatic transmitters[Age groups,"Risk-type","vacc-type"]*"found-and-isolate"
+	~	Dmnl
+	~		|
+
+Becomming infectious asymptomatic[Age groups,not isolated,"Risk-type","vacc-type"]=
+	DELAY3I(Exposing[Age groups,not isolated,"Risk-type","vacc-type"]*(1-"prob-DH"["Risk-type"\
+		])*"mild-asymptomatic"*(1-Chance of being informed on becomming symptomatic[Age groups\
+		,"Risk-type","vacc-type"]
+	),"average-time-tobe-exposed",Exposed[Age groups,not isolated,"Risk-type","vacc-type"\
+		]*(1-Chance of being informed on becomming symptomatic[Age groups,"Risk-type","vacc-type"\
+		]
+	)*(1-"prob-DH"["Risk-type"])*"mild-asymptomatic"/"average-time-tobe-exposed") ~~|
+Becomming infectious asymptomatic[Age groups,In isolation,"Risk-type","vacc-type"]=
+	DELAY3I(Exposing[Age groups,In isolation,"Risk-type","vacc-type"]*(1-"prob-DH"["Risk-type"\
+		])*"mild-asymptomatic","average-time-tobe-exposed",Exposed[Age groups,In isolation,\
+		"Risk-type","vacc-type"]*(1-"prob-DH"["Risk-type"])*"mild-asymptomatic"/"average-time-tobe-exposed"\
+		)
+	+
+	DELAY3(Getting informed of infection[Age groups,"Risk-type","vacc-type"]*(1-"prob-DH"\
+		["Risk-type"])*"mild-asymptomatic","average-time-tobe-exposed"-"when-symptoms-if-I"\
+		)
+	~	People/Day
+	~		|
+
+Getting informed of infection[Age groups,"Risk-type","vacc-type"]=
+	DELAY3I(Chance of being informed on becomming symptomatic[Age groups,"Risk-type","vacc-type"\
+		]*Exposing[Age groups,not isolated,"Risk-type","vacc-type"],"when-symptoms-if-I",Exposed\
+		[Age groups,not isolated,"Risk-type","vacc-type"]*Chance of being informed on becomming symptomatic\
+		[Age groups,"Risk-type","vacc-type"]/"when-symptoms-if-I")
+	~	People/Day
+	~		|
+
+Die at home[Age groups,Actual isolation,"Risk-type","vacc-type"]=
+	People dying at home[Age groups,Actual isolation,"Risk-type","vacc-type"]+People needing hospital dying at home\
+		[Age groups,Actual isolation,"Risk-type","vacc-type"]
+	~	People/Day
+	~		|
+
+Isolation:
+	In isolation, not isolated, switch
+	~	
+	~		|
+
+Lose immunity[Age groups,"Risk-type","vacc-type"]=
+	DELAY3((SUM(Recover at home[Age groups,Actual isolation!,"Risk-type","vacc-type"])+SUM\
+		(Recover symptomatic[Age groups,Actual isolation!,"Risk-type","vacc-type"]))*(1-"immune-mild"\
+		),"immunity-duration")+
+	DELAY3((Recover from critical care[Age groups,"Risk-type","vacc-type"]+Recover from general wards\
+		[Age groups,"Risk-type"
+	,"vacc-type"])*(1-"immune-severe"),"immunity-duration")
+	~	People/Day
+	~		|
+
+Infectious transmitters[Age groups,"Risk-type","vacc-type"]=
+	Infectious[Age groups,not isolated,"Risk-type","vacc-type"]+Infectious[Age groups,In isolation\
+		,"Risk-type","vacc-type"]*(1-"isolation-efficacy")
+	~	People
+	~		|
+
+Becomming infectious symptomatic[Age groups,Actual isolation,"Risk-type","vacc-type"]\
+		=
+	People getting sick[Age groups,Actual isolation,"Risk-type","vacc-type"]+People getting slight symptoms\
+		[Age groups,Actual isolation,"Risk-type"
+	,"vacc-type"]
+	~	People/Day
+	~		|
+
+"informer?"=
+	"isolate-inform?"*informers
+	~	Dmnl
+	~		|
+
+perc of people with symptoms getting sick[Age groups,Actual isolation,"Risk-type","vacc-type"\
+		]=
+	ZIDZ(People getting sick[Age groups,Actual isolation,"Risk-type","vacc-type"],People getting sick\
+		[Age groups,Actual isolation,"Risk-type","vacc-type"]+People getting slight symptoms\
+		[Age groups,Actual isolation,"Risk-type","vacc-type"])
+	~	Dmnl
+	~		|
+
+Perc of presymptomatic transmitters during infection[Age groups,"Risk-type","vacc-type"\
+		]= DELAY FIXED (
+	ZIDZ("Infectious pre-symptomatic"[Age groups,In isolation,"Risk-type","vacc-type"]*(\
+		1-"isolation-efficacy")+"Infectious pre-symptomatic"[Age groups,not isolated,"Risk-type"\
+		,"vacc-type"],transmitters[Age groups,"Risk-type","vacc-type"]), "when-symptoms-if-I"\
+		 ,ZIDZ("Infectious pre-symptomatic"[Age groups,In isolation,"Risk-type","vacc-type"\
+		]*(1-"isolation-efficacy")+"Infectious pre-symptomatic"[Age groups,not isolated,"Risk-type"\
+		,"vacc-type"],transmitters[Age groups,"Risk-type","vacc-type"]))
+	~	Dmnl
+	~		|
+
+non isolated in hospital[Age groups,"Risk-type","vacc-type"]=
+	(Critical care[Age groups,"Risk-type","vacc-type"]+Hospitalised[Age groups,"Risk-type"\
+		,"vacc-type"]) *(1-"isolation-efficacy")
+	~	People
+	~		|
+
+transmitters[Age groups,"Low-risk","vacc-type"]=
+	non isolated in hospital[Age groups,"Low-risk","vacc-type"]+Infectious transmitters[\
+		Age groups,"Low-risk","vacc-type"] ~~|
+transmitters[Age groups,"High-risk","vacc-type"]=
+	IF THEN ELSE ("recent-HR-iso"["High-risk"] = 0,Infectious transmitters[Age groups,"High-risk"\
+		,"vacc-type"]+ non isolated in hospital[Age groups,"High-risk","vacc-type"],SUM(Infectious\
+		[Age groups,Actual isolation!,"High-risk","vacc-type"])*(1-"isolation-efficacy")+non isolated in hospital\
+		[Age groups,"High-risk","vacc-type"])
+	~	People
+	~		|
+
+People dying[Age groups,Actual isolation,"Risk-type","vacc-type"]=
+	Die at home[Age groups,Actual isolation,"Risk-type","vacc-type"]+Die at critical care\
+		[Age groups,"Risk-type","vacc-type"]+Die in hospital[Age groups,"Risk-type","vacc-type"\
+		]
+	~	People/Day
+	~		|
+
+Becomming symptomatic[Age groups,not isolated,"Risk-type","vacc-type"]=
+	DELAY3I((People getting sick[Age groups,not isolated,"Risk-type","vacc-type"]+People getting slight symptoms\
+		[Age groups,not isolated,"Risk-type","vacc-type"])*(1-"self-isolating"),"when-symptoms-if-I"\
+		,("Infectious pre-symptomatic"[Age groups,not isolated,"Risk-type","vacc-type"]*(1-\
+		"self-isolating"))/"when-symptoms-if-I") ~~|
+Becomming symptomatic[Age groups,switch,"Risk-type","vacc-type"]=
+	DELAY3I((People getting sick[Age groups,not isolated,"Risk-type","vacc-type"]+People getting slight symptoms\
+		[Age groups,not isolated,"Risk-type","vacc-type"])*"self-isolating","when-symptoms-if-I"\
+		,("Infectious pre-symptomatic"[Age groups,not isolated,"Risk-type","vacc-type"]*"self-isolating"\
+		)/"when-symptoms-if-I") ~~|
+Becomming symptomatic[Age groups,In isolation,"Risk-type","vacc-type"]=
+	DELAY3I((People getting sick[Age groups,In isolation,"Risk-type","vacc-type"]+People getting slight symptoms\
+		[Age groups,In isolation,"Risk-type","vacc-type"]),"when-symptoms-if-I","Infectious pre-symptomatic"\
+		[Age groups,In isolation,"Risk-type","vacc-type"]/"when-symptoms-if-I")
+	~	People/Day
+	~		|
+
+People needing hospital dying at home[Age groups,Actual isolation,"Risk-type","vacc-type"\
+		]=
+	DELAY3(Infection becomes severe[Age groups,Actual isolation,"Risk-type","vacc-type"]\
+		*(1-"perc-people-going-toHospital")*"death-no-bed","average-time-tobe-hospital-toCritical"\
+		)
+	~	People/Day
+	~		|
+
+People needing hospital recovering at home[Age groups,Actual isolation,"Risk-type","vacc-type"\
+		]=
+	DELAY3(Infection becomes severe[Age groups,Actual isolation,"Risk-type","vacc-type"]\
+		*(1-"perc-people-going-toHospital")*(1-"death-no-bed"),"average-time-tobe-hospital-toImmune"\
+		)
+	~	People/Day
+	~		|
+
+Infectious[Age groups,Actual isolation,"Risk-type","vacc-type"]=
+	Infectious asymptomatic[Age groups,Actual isolation,"Risk-type","vacc-type"]+"Infectious pre-symptomatic"\
+		[Age groups,Actual isolation,"Risk-type","vacc-type"]+Infectious symptomatic[Age groups\
+		,Actual isolation,"Risk-type","vacc-type"]
+	~	People
+	~		|
+
+Infectious asymptomatic[Age groups,Actual isolation,"Risk-type","vacc-type"]= INTEG (
+	Becomming infectious asymptomatic[Age groups,Actual isolation,"Risk-type","vacc-type"\
+		]-Recover at home[Age groups,Actual isolation,"Risk-type","vacc-type"],
+		Initial Infectious asymptomatic[Age groups,Actual isolation,"Risk-type","vacc-type"\
+		])
+	~	People
+	~		|
+
+Chance of being informed on becomming symptomatic[Age groups,"Risk-type","vacc-type"]\
+		=
+	"informer?"*Perc of presymptomatic transmitters during infection[Age groups,"Risk-type"\
+		,"vacc-type"]*"found-and-isolate"
+	~	Dmnl
+	~		|
+
+Exposing[Age groups,In isolation,"Risk-type","vacc-type"]=
+	chance of contact[Age groups,"Risk-type","vacc-type"]*"prob-infect"[Age groups,"Risk-type"\
+		,"vacc-type"]*Chance of being informed on infection[Age groups,"Risk-type","vacc-type"\
+		] ~~|
+Exposing[Age groups,not isolated,"Risk-type","vacc-type"]=
+	chance of contact[Age groups,"Risk-type","vacc-type"]*"prob-infect"[Age groups,"Risk-type"\
+		,"vacc-type"]*(1-Chance of being informed on infection[Age groups,"Risk-type","vacc-type"\
+		])
+	~	People/Day
+	~		|
+
+Initial dead people["0",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+Initial dead people["0",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial dead people["0",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+Initial dead people["0",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial dead people["1",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+Initial dead people["1",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial dead people["1",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+Initial dead people["1",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial dead people["2",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+Initial dead people["2",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial dead people["2",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+Initial dead people["2",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial dead people["0",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+Initial dead people["0",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial dead people["0",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+Initial dead people["0",not isolated,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial dead people["1",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+Initial dead people["1",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial dead people["1",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+Initial dead people["1",not isolated,"Low-risk","non-vaccinated"]=
+	1 ~~|
+Initial dead people["2",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+Initial dead people["2",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial dead people["2",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+Initial dead people["2",not isolated,"Low-risk","non-vaccinated"]=
+	0
+	~	People
+	~		|
+
+Recover at home[Age groups,Actual isolation,"Risk-type","vacc-type"]=
+	DELAY3I(Becomming infectious asymptomatic[Age groups,Actual isolation,"Risk-type","vacc-type"\
+		],"average-time-tobe-infectious-toImmune",Infectious asymptomatic[Age groups,Actual isolation\
+		,"Risk-type","vacc-type"]/"average-time-tobe-infectious-toImmune")
+	~	People/Day
+	~		|
+
+"total-population"[Age groups,"Risk-type","vacc-type"]=
+	Critical care[Age groups,"Risk-type","vacc-type"]+Hospitalised[Age groups,"Risk-type"\
+		,"vacc-type"]+Immune[Age groups,"Risk-type"
+	,"vacc-type"]+SUM(Infectious[Age groups,Actual isolation!,"Risk-type","vacc-type"])+\
+		Susceptible[Age groups,"Risk-type","vacc-type"]+SUM(Exposed[Age groups,Actual isolation\
+		!,"Risk-type","vacc-type"])
+	~	People
+	~		|
+
+Perc of symptomatic transmitters[Age groups,"Risk-type","vacc-type"]=
+	ZIDZ(Symptomatic transmitters[Age groups,"Risk-type","vacc-type"],transmitters[Age groups\
+		,"Risk-type","vacc-type"])
+	~	Dmnl
+	~		|
+
+"perc-people-going-toHospital"=
+	IF THEN ELSE("blocked-bed-effect?"=1,XIDZ(MIN(Daily free beds/Beds per person,SUM(Infection becomes severe\
+		[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!])),SUM(Infection becomes severe\
+		[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!]),1),XIDZ(SUM(Infection becomes severe\
+		[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!]),SUM(Infection becomes severe\
+		[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!]),1))
+	~	Dmnl
+	~		|
+
+Previous infectious transmitter distr[Age groups,Actual isolation,"Risk-type","vacc-type"\
+		]= DELAY FIXED (
+	Infectious transmitters distr[Age groups,"Risk-type","vacc-type"],average time before symptoms\
+		 ,ZIDZ(Infectious[Age groups,Actual isolation,"Risk-type","vacc-type"],SUM(Infectious\
+		[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!])))
+	~	Dmnl
+	~		|
+
+Dead[Age groups,Actual isolation,"Risk-type","vacc-type"]= INTEG (
+	People dying[Age groups,Actual isolation,"Risk-type","vacc-type"],
+		Initial dead people[Age groups,Actual isolation,"Risk-type","vacc-type"])
+	~	People
+	~		|
+
+Infectious symptomatic[Age groups,In isolation,"Risk-type","vacc-type"]= INTEG (
+	Becomming symptomatic[Age groups,In isolation,"Risk-type","vacc-type"]-Die at home[Age groups\
+		,In isolation,"Risk-type","vacc-type"]-Hospitalisation[Age groups,In isolation,"Risk-type"\
+		,"vacc-type"]-Recover symptomatic[Age groups,In isolation,"Risk-type","vacc-type"]+\
+		Becomming symptomatic[Age groups,switch,"Risk-type","vacc-type"],
+		Initial infectious symptomatic[Age groups,In isolation,"Risk-type","vacc-type"]) ~~|
+Infectious symptomatic[Age groups,not isolated,"Risk-type","vacc-type"]= INTEG (
+	Becomming symptomatic[Age groups,not isolated,"Risk-type","vacc-type"]-Die at home[Age groups\
+		,not isolated,"Risk-type","vacc-type"]-Hospitalisation[Age groups,not isolated,"Risk-type"\
+		,"vacc-type"]-Recover symptomatic[Age groups,not isolated,"Risk-type","vacc-type"],
+		Initial infectious symptomatic[Age groups,not isolated,"Risk-type","vacc-type"])
+	~	People
+	~		|
+
+Immune[Age groups,"Risk-type","vacc-type"]= INTEG (
+	SUM(Recover at home[Age groups,Actual isolation!,"Risk-type","vacc-type"])+Recover from critical care\
+		[Age groups,"Risk-type","vacc-type"]+Recover from general wards[Age groups,"Risk-type"\
+		,"vacc-type"]+SUM(Recover symptomatic[Age groups,Actual isolation!,"Risk-type","vacc-type"\
+		])-Lose immunity[Age groups,"Risk-type","vacc-type"],
+		Initial Immune[Age groups,"Risk-type","vacc-type"])
+	~	People
+	~		|
+
+Symptomatic transmitters[Age groups,"Risk-type","vacc-type"]=
+	non isolated in hospital[Age groups,"Risk-type","vacc-type"]+Infectious symptomatic[\
+		Age groups,not isolated,"Risk-type","vacc-type"]+Infectious symptomatic[Age groups,\
+		In isolation,"Risk-type","vacc-type"]*(1-"isolation-efficacy")
+	~	People
+	~		|
+
+"Infectious pre-symptomatic"[Age groups,In isolation,"Risk-type","vacc-type"]= INTEG \
+		(
+	Becomming infectious symptomatic[Age groups,In isolation,"Risk-type","vacc-type"]-Becomming symptomatic\
+		[Age groups,In isolation,"Risk-type","vacc-type"],
+		"Initial infectious pre-symptomatic"[Age groups,In isolation,"Risk-type","vacc-type"\
+		]) ~~|
+"Infectious pre-symptomatic"[Age groups,not isolated,"Risk-type","vacc-type"]= INTEG \
+		(
+	Becomming infectious symptomatic[Age groups,not isolated,"Risk-type","vacc-type"]-Becomming symptomatic\
+		[Age groups,not isolated,"Risk-type","vacc-type"]-Becomming symptomatic[Age groups,\
+		switch,"Risk-type","vacc-type"],
+		"Initial infectious pre-symptomatic"[Age groups,not isolated,"Risk-type","vacc-type"\
+		])
+	~	People
+	~		|
+
+"Initial infectious pre-symptomatic"["0",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["0",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["0",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["0",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["1",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["1",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["1",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["1",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["2",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["2",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["2",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["2",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["0",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["0",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["0",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["0",not isolated,"Low-risk","non-vaccinated"]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["1",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["1",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["1",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["1",not isolated,"Low-risk","non-vaccinated"]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["2",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["2",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["2",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+"Initial infectious pre-symptomatic"["2",not isolated,"Low-risk","non-vaccinated"]=
+	0
+	~	People
+	~		|
+
+Initial infectious symptomatic["0",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+Initial infectious symptomatic["0",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial infectious symptomatic["0",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+Initial infectious symptomatic["0",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial infectious symptomatic["1",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+Initial infectious symptomatic["1",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial infectious symptomatic["1",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+Initial infectious symptomatic["1",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial infectious symptomatic["2",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+Initial infectious symptomatic["2",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial infectious symptomatic["2",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+Initial infectious symptomatic["2",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial infectious symptomatic["0",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+Initial infectious symptomatic["0",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial infectious symptomatic["0",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+Initial infectious symptomatic["0",not isolated,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial infectious symptomatic["1",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+Initial infectious symptomatic["1",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial infectious symptomatic["1",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+Initial infectious symptomatic["1",not isolated,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial infectious symptomatic["2",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+Initial infectious symptomatic["2",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial infectious symptomatic["2",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+Initial infectious symptomatic["2",not isolated,"Low-risk","non-vaccinated"]=
+	0
+	~	People
+	~		|
+
+Initial Infectious asymptomatic["0",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+Initial Infectious asymptomatic["0",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Infectious asymptomatic["0",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+Initial Infectious asymptomatic["0",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Infectious asymptomatic["1",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+Initial Infectious asymptomatic["1",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Infectious asymptomatic["1",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+Initial Infectious asymptomatic["1",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Infectious asymptomatic["2",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+Initial Infectious asymptomatic["2",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Infectious asymptomatic["2",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+Initial Infectious asymptomatic["2",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Infectious asymptomatic["0",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+Initial Infectious asymptomatic["0",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Infectious asymptomatic["0",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+Initial Infectious asymptomatic["0",not isolated,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Infectious asymptomatic["1",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+Initial Infectious asymptomatic["1",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Infectious asymptomatic["1",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+Initial Infectious asymptomatic["1",not isolated,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Infectious asymptomatic["2",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+Initial Infectious asymptomatic["2",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Infectious asymptomatic["2",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+Initial Infectious asymptomatic["2",not isolated,"Low-risk","non-vaccinated"]=
+	0
+	~	People
+	~		|
+
+average time before symptoms=
+	"average-time-tobe-exposed"+"when-symptoms-if-I"
+	~	Day
+	~		|
+
+"contact-age-homofily"[Age groups,"Risk-type","vacc-type"]=
+	("contact-age-homofily-0"[Age groups]*SUM("transmitter-distr"["0","Risk-type"!,"vacc-type"\
+		!])+"contact-age-homofily-1"[Age groups]*SUM("transmitter-distr"["1","Risk-type"!,"vacc-type"\
+		!])+"contact-age-homofily-2"[Age groups]*SUM("transmitter-distr"["2","Risk-type"!,"vacc-type"\
+		!]))/ELMCOUNT(Age groups)
+	~	Dmnl
+	~		|
+
+"prop-contact"["Risk-type"]=
+	IF THEN ELSE("distancing-option"<2, 1 , IF THEN ELSE("distancing-option"=2, 1-"distancing-reduction"\
+		 ,IF THEN ELSE("high-risk-shielding?"=1,"low-risk-needed"["Risk-type"],"distancing-reduction"\
+		)) )
+	~	Dmnl
+	~		|
+
+Infectious transmitters distr[Age groups,"Risk-type","vacc-type"]=
+	ZIDZ(Infectious transmitters[Age groups,"Risk-type","vacc-type"],SUM(Infectious transmitters\
+		[Age groups!,"Risk-type"!,"vacc-type"!]))
+	~	Dmnl
+	~		|
+
+"low-risk-needed"["Low-risk"]=
+	("distancing-reduction"-"prop-risk"["High-risk"])/(1-"prop-risk"["High-risk"]) ~~|
+"low-risk-needed"["High-risk"]=
+	0
+	~	Dmnl
+	~		|
+
+"prob-infect"[Age groups,"Risk-type","vacc-type"]=
+	IF THEN ELSE("triggered?"=1,"vacc-effect-I"[Age groups,"Risk-type","vacc-type"]*"prop-contact"\
+		["Risk-type"]*"prop-contact"["Risk-type"]*IF THEN ELSE("distancing-option"=1,1-"distancing-reduction"
+	,1),"vacc-effect-I"[Age groups,"Risk-type","vacc-type"])
+	~	1/People
+	~	prop-contact differences
+	|
+
+"available-susceptible"[Age groups,"High-risk","vacc-type"]=
+	IF THEN ELSE("recent-HR-iso"["High-risk"]=0,Susceptible[Age groups,"High-risk","vacc-type"\
+		],Susceptible[Age groups,"High-risk","vacc-type"]*(1-"isolation-efficacy")) ~~|
+"available-susceptible"[Age groups,"Low-risk","vacc-type"]=
+	Susceptible[Age groups,"Low-risk","vacc-type"]
+	~	People
+	~		|
+
+"high-risk-shielding?"=
+	1
+	~	Dmnl
+	~		|
+
+"begin-trigger"=SAMPLE IF TRUE(
+	delay1("triggered?"+"time-triggered"=0,TIME STEP),Time*"triggered?",0)
+	~	Day
+	~		|
+
+"triggered?"=
+	IF THEN ELSE("check-triggered?"=1,IF THEN ELSE(:NOT: "trigger-type"= 0 :AND:"time-triggered"\
+		 =1,0,1),0)
+	~	Dmnl
+	~		|
+
+"time-triggered?"=
+	DELAY FIXED("triggered?",Days per week*"intervention-duration",0)
+	~	Dmnl
+	~		|
+
+"time-triggered"=SAMPLE IF TRUE(
+	"time-triggered?">0,"time-triggered?",0)
+	~	Dmnl
+	~		|
+
+"self-isolating"=
+	"isolate-inform?"*"self-isolators"
+	~	Dmnl
+	~		|
+
+"tot-n-exposed increase"=
+	SUM(Exposing[Age groups!,Actual isolation!,"Risk-type"!,"vacc-type"!])
+	~	People/Day
+	~		|
+
+"trigger-type"=
+	3
+	~	Dmnl
+	~	0 = interactive, 1 = days, 2 = hospital, 3= cases
+	|
+
+"Initial tot-n-exposed"=
+	0
+	~	People
+	~		|
+
+"tot-n-exposed"= INTEG (
+	"tot-n-exposed increase",
+		"Initial tot-n-exposed")
+	~	People
+	~		|
+
+"trigger-level"=
+	250
+	~	Dmnl
+	~		|
+
+Die at critical care[Age groups,"Risk-type","vacc-type"]=
+	DELAY3I(Condition worsens[Age groups,"Risk-type","vacc-type"]*"prob-CritDeath","average-time-tobe-critical-toDead"\
+		,Critical care[Age groups,"Risk-type","vacc-type"]*"prob-CritDeath"/"average-time-tobe-critical-toDead"\
+		)
+	~	People/Day
+	~		|
+
+"IC-isolation-duration"=
+	14
+	~	Day
+	~	Not used in netlogo model for some reason
+	~	:SUPPLEMENTARY 
+	|
+
+Die in hospital[Age groups,"Risk-type","vacc-type"]=
+	DELAY3I(SUM(Hospitalisation[Age groups,Actual isolation!,"Risk-type","vacc-type"])*"prob-HospDeath"\
+		,"average-time-tobe-hospital-toDead",Hospitalised[Age groups,"Risk-type","vacc-type"\
+		]*"prob-HospDeath"/"average-time-tobe-hospital-toDead")
+	~	People/Day
+	~		|
+
+"intervention-duration"=
+	1
+	~	Week
+	~		|
+
+Recover from critical care[Age groups,"Risk-type","vacc-type"]=
+	DELAY3I(Condition worsens[Age groups,"Risk-type","vacc-type"]*(1-"prob-CritDeath"), \
+		"average-time-tobe-critical-toImmune",Critical care[Age groups,"Risk-type","vacc-type"\
+		]*(1-"prob-CritDeath")/"average-time-tobe-critical-toImmune")
+	~	People/Day
+	~		|
+
+Recover from general wards[Age groups,"Risk-type","vacc-type"]=
+	DELAY3I(SUM(Hospitalisation[Age groups,Actual isolation!,"Risk-type","vacc-type"])*(\
+		1-("prob-HospCrit"+"prob-HospDeath")), "average-time-tobe-hospital-toImmune",Hospitalised\
+		[Age groups,"Risk-type","vacc-type"]*(1-("prob-HospCrit"+"prob-HospDeath"))/"average-time-tobe-hospital-toImmune"
+	 )
+	~	People/Day
+	~		|
+
+"move-long-impact"=
+	0.00135
+	~	Dmnl
+	~		|
+
+"move-reduction-long"=
+	1
+	~	Dmnl
+	~		|
+
+"move-short-impact"=
+	0.00045
+	~	Dmnl
+	~		|
+
+"move-reduction-short"=
+	1
+	~	Dmnl
+	~		|
+
+Condition worsens[Age groups,"Risk-type","vacc-type"]=
+	DELAY3I(SUM(Hospitalisation[Age groups,Actual isolation!,"Risk-type","vacc-type"])*"prob-HospCrit"\
+		, "average-time-tobe-hospital-toCritical",Hospitalised[Age groups,"Risk-type","vacc-type"\
+		]*"prob-HospCrit"/"average-time-tobe-hospital-toCritical")
+	~	People/Day
+	~		|
+
+Age groups:
+	"0","1","2"
+	~	
+	~		|
+
+"average-time-tobe-critical-toDead"=
+	13.7165
+	~	Day
+	~		|
+
+"average-time-tobe-critical-toImmune"=
+	17.7685
+	~	Day
+	~		|
+
+"average-time-tobe-exposed"=
+	5.51991
+	~	Day
+	~		|
+
+"average-time-tobe-hospital-toCritical"=
+	1.95
+	~	Day
+	~		|
+
+"average-time-tobe-hospital-toDead"=
+	7.986
+	~	Day
+	~		|
+
+"average-time-tobe-hospital-toImmune"=
+	8.992
+	~	Day
+	~		|
+
+"average-time-tobe-infectious-toDead"=
+	6.996
+	~	Day
+	~		|
+
+"average-time-tobe-infectious-toHospital"=
+	5.996
+	~	Day
+	~		|
+
+"average-time-tobe-infectious-toImmune"=
+	9.5
+	~	Day
+	~		|
+
+Beds per person=
+	1
+	~	Bed/People
+	~		|
+
+"beds-C"=
+	3
+	~	Bed
+	~		|
+
+"beds-H"=
+	40
+	~	Bed
+	~		|
+
+"blocked-bed-effect?"=
+	0
+	~	Dmnl
+	~		|
+
+chance of contact[Age groups,"Risk-type","vacc-type"]=
+	SUM(transmitters[Age groups!,"Risk-type"!,"vacc-type"!])*"vacc-effect-S"[Age groups,\
+		"Risk-type","vacc-type"]*walking
+	~	People*People/Day
+	~		|
+
+"contact-age-homofily-0"[Age groups]=
+	3.447, 0.881, 0.247
+	~	Dmnl
+	~		|
+
+"contact-age-homofily-1"[Age groups]=
+	0.881,1.136,0.46
+	~	Dmnl
+	~		|
+
+"contact-age-homofily-2"[Age groups]=
+	0.247,0.46,1.04
+	~	Dmnl
+	~		|
+
+Critical care[Age groups,"Risk-type","vacc-type"]= INTEG (
+	Condition worsens[Age groups,"Risk-type","vacc-type"]-Die at critical care[Age groups\
+		,"Risk-type","vacc-type"]-Recover from critical care[Age groups,"Risk-type","vacc-type"\
+		],
+		Initial Critical care[Age groups,"Risk-type","vacc-type"])
+	~	People
+	~		|
+
+Daily free beds=
+	"total-beds"/day-("total-hosp+crit"/day-"expected-hospital-outflow")*Beds per person
+	~	Bed/Day
+	~		|
+
+day=
+	1
+	~	Day
+	~		|
+
+Days per week=
+	7
+	~	Day/Week
+	~		|
+
+"death-no-bed"=
+	0.8
+	~	Dmnl
+	~		|
+
+DfromDH=
+	"prob-InfDeath"/("prob-InfDeath"+"prob-InfHosp")
+	~	Dmnl
+	~		|
+
+"distancing-option"=
+	0
+	~	Dmnl
+	~	0 = none, 1 = ByContact, 2 = AllPeople, 3 = AllOrNone,
+	|
+
+"distancing-reduction"=
+	0.25
+	~	Dmnl
+	~		|
+
+"expected-hospital-outflow"=
+	SUM(Die at critical care[Age groups!,"Risk-type"!,"vacc-type"!])+SUM(Die in hospital\
+		[Age groups!,"Risk-type"!,"vacc-type"!])+SUM(Recover from critical care[Age groups!\
+		,"Risk-type"!,"vacc-type"!])+SUM(Recover from general wards[Age groups!,"Risk-type"\
+		!,"vacc-type"!])
+	~	People/Day
+	~		|
+
+"found-and-isolate"=
+	0.4
+	~	Dmnl
+	~		|
+
+Hospitalised[Age groups,"Risk-type","vacc-type"]= INTEG (
+	SUM(Hospitalisation[Age groups,Actual isolation!,"Risk-type","vacc-type"])-Condition worsens\
+		[Age groups,"Risk-type","vacc-type"]-Die in hospital[Age groups,"Risk-type","vacc-type"\
+		]-Recover from general wards[Age groups,"Risk-type","vacc-type"],
+		Initial Hospitalised[Age groups,"Risk-type","vacc-type"])
+	~	People
+	~		|
+
+"HR-shield-duration"=
+	32
+	~	Week
+	~		|
+
+"immune-loss-when"=
+	12
+	~	Week
+	~		|
+
+"immune-mild"=
+	1
+	~	Dmnl
+	~		|
+
+"immune-severe"=
+	1
+	~	Dmnl
+	~		|
+
+"immunity-duration"=
+	Days per week*"immune-loss-when"
+	~	Day
+	~		|
+
+informers=
+	0
+	~	Dmnl
+	~		|
+
+Initial Critical care["0","High-risk",vaccinated]=
+	0 ~~|
+Initial Critical care["0","High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Critical care["0","Low-risk",vaccinated]=
+	0 ~~|
+Initial Critical care["0","Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Critical care["1","High-risk",vaccinated]=
+	0 ~~|
+Initial Critical care["1","High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Critical care["1","Low-risk",vaccinated]=
+	0 ~~|
+Initial Critical care["1","Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Critical care["2","High-risk",vaccinated]=
+	0 ~~|
+Initial Critical care["2","High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Critical care["2","Low-risk",vaccinated]=
+	0 ~~|
+Initial Critical care["2","Low-risk","non-vaccinated"]=
+	0
+	~	People
+	~		|
+
+Initial Exposed["0",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+Initial Exposed["0",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Exposed["0",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+Initial Exposed["0",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Exposed["1",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+Initial Exposed["1",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Exposed["1",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+Initial Exposed["1",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Exposed["2",In isolation,"High-risk",vaccinated]=
+	0 ~~|
+Initial Exposed["2",In isolation,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Exposed["2",In isolation,"Low-risk",vaccinated]=
+	0 ~~|
+Initial Exposed["2",In isolation,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Exposed["0",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+Initial Exposed["0",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Exposed["0",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+Initial Exposed["0",not isolated,"Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Exposed["1",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+Initial Exposed["1",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Exposed["1",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+Initial Exposed["1",not isolated,"Low-risk","non-vaccinated"]=
+	1 ~~|
+Initial Exposed["2",not isolated,"High-risk",vaccinated]=
+	0 ~~|
+Initial Exposed["2",not isolated,"High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Exposed["2",not isolated,"Low-risk",vaccinated]=
+	0 ~~|
+Initial Exposed["2",not isolated,"Low-risk","non-vaccinated"]=
+	0
+	~	People
+	~		|
+
+Initial Hospitalised["0","High-risk",vaccinated]=
+	0 ~~|
+Initial Hospitalised["0","High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Hospitalised["0","Low-risk",vaccinated]=
+	0 ~~|
+Initial Hospitalised["0","Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Hospitalised["1","High-risk",vaccinated]=
+	0 ~~|
+Initial Hospitalised["1","High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Hospitalised["1","Low-risk",vaccinated]=
+	0 ~~|
+Initial Hospitalised["1","Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Hospitalised["2","High-risk",vaccinated]=
+	0 ~~|
+Initial Hospitalised["2","High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Hospitalised["2","Low-risk",vaccinated]=
+	0 ~~|
+Initial Hospitalised["2","Low-risk","non-vaccinated"]=
+	0
+	~	People
+	~		|
+
+Initial Immune["0","High-risk",vaccinated]=
+	0 ~~|
+Initial Immune["0","High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Immune["0","Low-risk",vaccinated]=
+	0 ~~|
+Initial Immune["0","Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Immune["1","High-risk",vaccinated]=
+	0 ~~|
+Initial Immune["1","High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Immune["1","Low-risk",vaccinated]=
+	0 ~~|
+Initial Immune["1","Low-risk","non-vaccinated"]=
+	0 ~~|
+Initial Immune["2","High-risk",vaccinated]=
+	0 ~~|
+Initial Immune["2","High-risk","non-vaccinated"]=
+	0 ~~|
+Initial Immune["2","Low-risk",vaccinated]=
+	0 ~~|
+Initial Immune["2","Low-risk","non-vaccinated"]=
+	0
+	~	People
+	~		|
+
+Initial Susceptible["0","High-risk",vaccinated]=
+	0 ~~|
+Initial Susceptible["0","High-risk","non-vaccinated"]=
+	170 ~~|
+Initial Susceptible["0","Low-risk",vaccinated]=
+	0 ~~|
+Initial Susceptible["0","Low-risk","non-vaccinated"]=
+	4086 ~~|
+Initial Susceptible["1","High-risk",vaccinated]=
+	0 ~~|
+Initial Susceptible["1","High-risk","non-vaccinated"]=
+	530 ~~|
+Initial Susceptible["1","Low-risk",vaccinated]=
+	0 ~~|
+Initial Susceptible["1","Low-risk","non-vaccinated"]=
+	12722 ~~|
+Initial Susceptible["2","High-risk",vaccinated]=
+	0 ~~|
+Initial Susceptible["2","High-risk","non-vaccinated"]=
+	107 ~~|
+Initial Susceptible["2","Low-risk",vaccinated]=
+	0 ~~|
+Initial Susceptible["2","Low-risk","non-vaccinated"]=
+	2256
+	~	People
+	~		|
+
+"isolate-inform?"=
+	0
+	~	Dmnl
+	~		|
+
+"isolation-efficacy"=
+	0.89
+	~	Dmnl
+	~		|
+
+"max-presymptomatic"=
+	3
+	~	Day
+	~		~	:SUPPLEMENTARY 
+	|
+
+"mild-asymptomatic"=
+	0.45
+	~	Dmnl
+	~		|
+
+"prob-CritDeath"=
+	0.43
+	~	Dmnl
+	~		|
+
+"prob-DH"["High-risk"]=
+	(("prob-InfDeath"+"prob-InfHosp")/("prop-risk"["High-risk"]*"relative-risk"+"prop-risk"\
+		["Low-risk"]))*"relative-risk" ~~|
+"prob-DH"["Low-risk"]=
+	("prob-InfDeath"+"prob-InfHosp")/("prop-risk"["High-risk"]*"relative-risk"+"prop-risk"\
+		["Low-risk"])
+	~	Dmnl
+	~		|
+
+"prob-HospCrit"=
+	0.09
+	~	Dmnl
+	~		|
+
+"prob-HospDeath"=
+	0.28
+	~	Dmnl
+	~		|
+
+"prob-InfDeath"=
+	0.0085
+	~	Dmnl
+	~		|
+
+"prob-InfHosp"=
+	0.05
+	~	Dmnl
+	~		|
+
+"prop-move-long"=
+	0.15
+	~	Dmnl/Day
+	~		|
+
+"prop-move-short"=
+	0.4
+	~	Dmnl/Day
+	~		|
+
+"relative-risk"=
+	4
+	~	Dmnl
+	~		|
+
+"Risk-type":
+	"High-risk","Low-risk"
+	~	
+	~		|
+
+"self-isolators"=
+	0
+	~	Dmnl
+	~		|
+
+"SI-isolation-duration"=
+	14
+	~	Day
+	~	Niet gebruikt omdat, isolatie anders gemodelleerd
+	~	:SUPPLEMENTARY 
+	|
+
+"total-beds"=
+	"beds-C"+"beds-H"
+	~	Bed
+	~		|
+
+"transmission-chance"[Age groups,"Risk-type","vacc-type"]=
+	IF THEN ELSE("use-age-mixing?"=1,"contact-age-homofily"[Age groups,"Risk-type","vacc-type"\
+		]*"transmission-parameter", "transmission-parameter")
+	~	1/People
+	~		|
+
+"transmission-parameter"=
+	0.04
+	~	Dmnl/People
+	~		|
+
+"transmitter-distr"[Age groups,"Risk-type","vacc-type"]=
+	ZIDZ(transmitters[Age groups,"Risk-type","vacc-type"],SUM(transmitters[Age groups!,"Risk-type"\
+		!,"vacc-type"!]))
+	~	Dmnl
+	~		|
+
+"use-age-mixing?"=
+	0
+	~	Dmnl
+	~		|
+
+"vacc-effect-I"[Age groups,"Risk-type","vacc-type"]=
+	"transmission-chance"[Age groups,"Risk-type","vacc-type"]*(1-"vaccine-efficacy-I"["vacc-type"\
+		])
+	~	1/People
+	~		|
+
+"vacc-effect-S"[Age groups,"Risk-type","vacc-type"]=
+	"available-susceptible"[Age groups,"Risk-type","vacc-type"]*(1-"vaccine-efficacy-S"[\
+		"vacc-type"])
+	~	People
+	~		|
+
+"vacc-type":
+	vaccinated, "non-vaccinated"
+	~	
+	~		|
+
+"vaccinate-to-level"=
+	1
+	~	Dmnl
+	~		|
+
+"vaccine-efficacy-I"["vacc-type"]=
+	0.3,0
+	~	Dmnl
+	~		|
+
+"when-symptoms-if-I"=
+	1
+	~	Day
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 200
+	~	Day
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Day
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Day [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.03125
+	~	Day [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,80,0
+10,1,Susceptible,40,209,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Exposed,249,189,63,37,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Immune,1177,197,151,24,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,4,6,2,4,0,0,22,0,0,0,-1--1--1,,1|(172,209)|
+1,5,6,1,100,0,0,22,0,0,0,-1--1--1,,1|(109,209)|
+11,6,1410,145,209,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,7,Exposing,145,224,32,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,9,2,100,0,0,22,0,0,0,-1--1--1,,1|(241,96)|
+11,9,1058,241,29,8,8,34,3,0,0,3,0,0,0,0,0,0,0,0,0
+10,10,Becomming infectious asymptomatic,241,4,69,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,11,12,3,4,0,0,22,0,0,0,-1--1--1,,1|(1177,20)|
+11,12,1432,769,20,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,13,Recover at home,769,37,56,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Hospitalised,541,496,44,21,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,15,16,14,4,0,0,22,0,0,0,-1--1--1,,1|(533,453)|
+11,16,1322,533,424,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,17,Hospitalisation,597,424,48,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,20,3,4,0,0,22,0,0,0,-1--1--1,,1|(1177,493)|
+1,19,20,14,100,0,0,22,0,0,0,-1--1--1,,1|(664,493)|
+11,20,728,752,493,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,21,Recover from general wards,752,524,45,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,22,Critical care,520,633,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,23,25,22,4,0,0,22,0,0,0,-1--1--1,,1|(529,599)|
+1,24,25,14,100,0,0,22,0,0,0,-1--1--1,,1|(529,543)|
+11,25,1300,529,577,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,26,Condition worsens,592,577,59,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,27,29,3,4,0,0,22,0,0,0,-1--1--1,,1|(1209,425)|
+1,28,29,22,100,0,0,22,0,0,0,-1--1--1,,1|(880,637)|
+11,29,2268,1209,637,8,8,34,131,0,0,1,0,0,0,0,0,0,0,0,0
+10,30,Recover from critical care,1209,668,44,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,31,48,516,793,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,32,34,31,4,0,0,22,0,0,0,-1--1--1,,1|(516,755)|
+1,33,34,22,100,0,0,22,0,0,0,-1--1--1,,1|(516,681)|
+11,34,48,516,717,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,35,Die at critical care,597,717,57,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,36,Initial Susceptible,-147,177,55,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,37,Initial Exposed,80,336,47,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,38,Initial Hospitalised,280,593,57,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,39,Initial Critical care,756,708,57,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,40,Initial Immune,1313,129,44,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,41,38,14,0,0,0,0,0,128,1,-1--1--1,,1|(397,549)|
+1,42,39,22,0,0,0,0,0,128,1,-1--1--1,,1|(647,673)|
+1,43,40,3,1,0,0,0,0,128,1,-1--1--1,,1|(1233,153)|
+10,44,"isolation-efficacy",-72,-184,53,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,45,"transmission-parameter",336,-495,44,16,8,130,0,3,0,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,46,"contact-age-homofily",596,-419,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,47,"contact-age-homofily-1",745,-532,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,48,"contact-age-homofily-0",577,-519,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,49,"contact-age-homofily-2",757,-416,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,50,48,46,0,0,0,0,0,128,0,-1--1--1,,1|(584,-475)|
+1,51,47,46,0,0,0,0,0,128,0,-1--1--1,,1|(676,-479)|
+1,52,49,46,0,0,0,0,0,128,0,-1--1--1,,1|(683,-416)|
+10,53,"use-age-mixing?",444,-508,51,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,54,"transmission-chance",429,-420,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,55,45,54,0,0,0,0,0,128,0,-1--1--1,,1|(375,-463)|
+1,56,53,54,0,0,0,0,0,128,0,-1--1--1,,1|(440,-475)|
+1,57,46,54,0,0,0,0,0,128,0,-1--1--1,,1|(519,-419)|
+10,58,"triggered?",-151,-512,32,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,59,"prob-infect",37,-507,36,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,60,58,59,1,0,0,0,0,128,0,-1--1--1,,1|(-59,-523)|
+10,61,"distancing-option",-112,-715,56,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,62,"prop-contact",16,-619,44,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,63,62,59,0,0,0,0,0,128,0,-1--1--1,,1|(28,-569)|
+1,64,61,62,1,0,0,0,0,128,0,-1--1--1,,1|(-53,-671)|
+10,65,"distancing-reduction",117,-695,36,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,66,65,62,1,0,0,0,0,128,0,-1--1--1,,1|(73,-639)|
+1,67,61,59,1,0,0,0,0,64,0,-1--1--1,,1|(-76,-583)|
+1,68,65,59,1,0,0,0,0,64,0,-1--1--1,,1|(97,-596)|
+1,69,71,1,4,0,0,22,0,0,0,-1--1--1,,3|(28,1012)|(28,1013)|(28,621)|
+1,70,71,3,100,0,0,22,0,0,0,-1--1--1,,3|(1268,317)|(1268,317)|(1268,269)|
+11,71,4622,1268,1012,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,72,Lose immunity,1268,1029,57,13,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+12,73,48,344,500,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,74,76,73,4,0,0,22,0,0,0,-1--1--1,,1|(381,496)|
+1,75,76,14,100,0,0,22,0,0,0,-1--1--1,,1|(460,496)|
+11,76,48,416,496,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,77,Die in hospital,416,513,45,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,78,"prop-move-short",161,-163,56,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,79,"prop-move-long",25,-132,52,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,80,"high-risk-shielding?",2336,1384,31,29,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,81,"HR-shield-duration",2593,1292,36,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,82,"move-reduction-short",156,-116,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,83,"move-reduction-long",-96,-76,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,84,"intervention-duration",-323,-731,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,85,"vaccinate-to-level",1529,-263,56,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,86,"vaccine-efficacy-I",209,-503,56,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,87,"vaccine-efficacy-S",-143,40,60,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,88,"isolate-inform?",2325,844,47,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,89,"mild-asymptomatic",1556,29,59,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,90,"self-isolators",2545,844,40,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,91,"SI-isolation-duration",2813,1056,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,92,informers,2013,989,32,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,93,"found-and-isolate",1925,1153,55,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,94,"IC-isolation-duration",1628,-323,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,95,"prob-InfDeath",1921,-75,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,96,"prob-InfHosp",1812,12,44,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,97,"prob-HospDeath",657,537,56,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,98,"prob-HospCrit",877,544,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,99,"prob-CritDeath",865,773,49,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,100,"prop-risk",-192,440,40,11,8,2,0,3,0,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,101,"relative-risk",2036,4,40,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,102,"immune-mild",1369,945,41,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,103,"immune-severe",1136,1108,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,104,"immune-loss-when",1360,1069,59,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,105,"when-symptoms-if-I",2268,769,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,106,"max-presymptomatic",1637,-267,40,20,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,107,"beds-H",2380,-39,25,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,108,"beds-C",2296,-83,25,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,109,"average-time-tobe-exposed",277,-60,60,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,110,109,10,1,0,0,0,0,128,0,-1--1--1,,1|(261,-8)|
+1,111,2,10,1,0,0,0,0,128,0,-1--1--1,,1|(208,120)|
+10,112,"prob-DH",1928,24,31,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,113,95,112,0,0,0,0,0,128,0,-1--1--1,,1|(1923,-32)|
+1,114,96,112,0,0,0,0,0,128,0,-1--1--1,,1|(1869,17)|
+1,115,101,112,0,0,0,0,0,64,0,-1--1--1,,1|(1984,13)|
+10,116,"prop-risk",2020,-35,55,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,117,116,112,1,0,0,0,0,128,0,-1--1--1,,1|(1948,8)|
+10,118,DfromDH,1856,-40,33,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,119,95,118,0,0,0,0,0,128,0,-1--1--1,,1|(1896,-60)|
+1,120,96,118,0,0,0,0,0,64,0,-1--1--1,,1|(1829,-8)|
+10,121,"average-time-tobe-hospital-toCritical",777,589,64,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,122,"average-time-tobe-hospital-toImmune",853,460,64,23,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,123,"average-time-tobe-hospital-toDead",264,557,64,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,124,"average-time-tobe-critical-toImmune",1125,796,60,24,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,125,"average-time-tobe-critical-toDead",677,785,109,9,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,126,26,29,1,0,0,0,0,128,0,-1--1--1,,1|(804,560)|
+1,127,25,34,1,0,0,0,0,128,0,-1--1--1,,1|(464,632)|
+1,128,99,35,0,0,0,0,0,128,0,-1--1--1,,1|(739,748)|
+1,129,125,35,0,0,0,0,0,64,0,-1--1--1,,1|(643,756)|
+1,130,124,30,0,0,0,0,0,128,0,-1--1--1,,1|(1164,735)|
+1,131,99,30,1,0,0,0,0,128,0,-1--1--1,,1|(1032,736)|
+10,132,"total-hosp+crit",316,717,47,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,133,17,26,1,0,0,0,0,128,0,-1--1--1,,1|(589,488)|
+1,134,17,20,1,0,0,0,0,128,0,-1--1--1,,1|(697,437)|
+1,135,16,76,1,0,0,0,0,128,0,-1--1--1,,1|(460,445)|
+1,136,97,21,1,0,0,0,0,128,0,-1--1--1,,1|(676,517)|
+1,137,97,77,1,0,0,0,0,128,0,-1--1--1,,1|(584,541)|
+1,138,123,77,0,0,0,0,0,64,0,-1--1--1,,1|(347,533)|
+1,139,98,26,1,0,0,0,0,128,0,-1--1--1,,1|(761,545)|
+1,140,98,21,1,0,0,0,0,128,0,-1--1--1,,1|(828,517)|
+1,141,121,26,0,0,0,0,0,64,0,-1--1--1,,1|(688,583)|
+1,142,122,21,0,0,0,0,0,64,0,-1--1--1,,1|(804,492)|
+10,143,"expected-hospital-outflow",412,829,59,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,144,Die in hospital,312,912,56,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,145,Recover from critical care,560,869,49,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,146,Recover from general wards,460,913,49,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,147,Die at critical care,261,856,47,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,148,144,143,0,0,0,0,0,128,0,-1--1--1,,1|(352,879)|
+1,149,147,143,0,0,0,0,0,128,0,-1--1--1,,1|(324,844)|
+1,150,146,143,0,0,0,0,0,128,0,-1--1--1,,1|(440,877)|
+1,151,145,143,0,0,0,0,0,128,0,-1--1--1,,1|(497,852)|
+10,152,Infection becomes severe,753,421,63,19,8,2,0,3,0,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,153,day,317,820,13,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,154,Daily free beds,380,765,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,155,132,154,1,0,0,0,0,128,0,-1--1--1,,1|(373,725)|
+1,156,143,154,1,0,0,0,0,128,0,-1--1--1,,1|(401,792)|
+10,157,"total-beds",2253,-4,33,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,158,108,157,0,0,0,0,0,128,0,-1--1--1,,1|(2280,-49)|
+1,159,107,157,0,0,0,0,0,128,0,-1--1--1,,1|(2327,-24)|
+10,160,Beds per person,252,784,52,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,161,160,154,0,0,0,0,0,128,0,-1--1--1,,1|(312,775)|
+10,162,"total-beds",225,744,44,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,163,162,154,1,0,0,0,0,128,0,-1--1--1,,1|(297,732)|
+1,164,153,154,1,0,0,0,0,128,0,-1--1--1,,1|(344,804)|
+10,165,"perc-people-going-toHospital",297,468,104,9,8,2,0,3,0,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,166,152,17,1,0,0,0,0,128,0,-1--1--1,,1|(679,413)|
+1,167,165,16,1,0,0,0,0,128,0,-1--1--1,,1|(436,428)|
+10,168,Recover at home,1024,1152,40,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,169,168,72,1,0,0,0,0,128,0,-1--1--1,,1|(1165,1160)|
+1,170,30,71,1,0,0,0,0,128,0,-1--1--1,,1|(1213,748)|
+1,171,102,72,0,0,0,0,0,128,0,-1--1--1,,1|(1324,981)|
+1,172,103,72,0,0,0,0,0,128,0,-1--1--1,,1|(1193,1073)|
+1,173,104,176,1,0,0,0,0,128,0,-1--1--1,,1|(1349,1092)|
+10,174,Days per week,1293,1201,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,175,174,176,1,0,0,0,0,128,0,-1--1--1,,1|(1349,1148)|
+10,176,"immunity-duration",1300,1124,56,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,177,176,72,0,0,0,0,0,128,0,-1--1--1,,1|(1288,1084)|
+10,178,Becomming infectious asymptomatic,1724,272,76,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,179,Die in hospital,2957,1224,56,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,180,Die at critical care,2980,1169,47,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,181,Recover from critical care,3084,581,49,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,182,Recover from general wards,2868,516,49,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,183,"informer?",2073,1028,31,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,184,92,183,0,0,0,0,0,128,0,-1--1--1,,1|(2036,1004)|
+10,185,transmitters,653,-252,37,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,186,Hospitalised,160,-316,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,187,Critical care,289,-315,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,188,44,185,1,0,0,0,0,128,0,-1--1--1,,1|(285,-248)|
+10,189,"total-population",2016,1344,52,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,190,Immune,1980,1489,35,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,191,Hospitalised,1801,1313,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,192,Susceptible,1912,1448,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,193,Critical care,1957,1260,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,194,193,189,0,0,0,0,0,128,0,-1--1--1,,1|(1981,1296)|
+1,195,191,189,0,0,0,0,0,128,0,-1--1--1,,1|(1899,1328)|
+1,196,192,189,0,0,0,0,0,128,0,-1--1--1,,1|(1959,1400)|
+1,197,190,189,0,0,0,0,0,128,0,-1--1--1,,1|(1995,1423)|
+10,198,Days per week,2640,1397,57,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,199,"triggered?",2616,1485,41,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,200,"recent-HR-iso",2549,1437,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,201,81,200,0,0,0,0,0,128,0,-1--1--1,,1|(2571,1364)|
+1,202,198,200,0,0,0,0,0,128,0,-1--1--1,,1|(2600,1416)|
+1,203,199,200,1,0,0,0,0,128,0,-1--1--1,,1|(2549,1469)|
+10,204,walking,40,-75,25,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,205,78,204,0,0,0,0,0,128,0,-1--1--1,,1|(107,-123)|
+1,206,79,204,0,0,0,0,0,128,0,-1--1--1,,1|(31,-108)|
+10,207,"available-susceptible",-227,137,71,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,208,1,207,1,0,0,0,0,128,0,-1--1--1,,1|(-104,156)|
+10,209,"recent-HR-iso",-67,-156,55,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,210,209,207,1,0,0,0,0,128,0,-1--1--1,,1|(-179,-55)|
+1,211,44,207,1,0,0,0,0,64,0,-1--1--1,,1|(-244,16)|
+10,212,"transmitter-distr",676,-347,52,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,213,185,212,0,0,0,0,0,128,0,-1--1--1,,1|(664,-292)|
+1,214,212,46,0,0,0,0,0,128,0,-1--1--1,,1|(648,-373)|
+10,215,"vacc-effect-I",204,-435,41,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,216,54,215,1,0,0,0,0,128,0,-1--1--1,,1|(312,-420)|
+1,217,215,59,1,0,0,0,0,128,0,-1--1--1,,1|(112,-459)|
+1,218,86,215,0,0,0,0,0,128,0,-1--1--1,,1|(208,-475)|
+10,219,"vacc-effect-S",-84,84,43,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,220,87,219,0,0,0,0,0,128,0,-1--1--1,,1|(-119,57)|
+1,221,207,219,1,0,0,0,0,128,0,-1--1--1,,1|(-179,112)|
+10,222,chance of contact,64,45,55,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,223,219,222,1,0,0,0,0,128,0,-1--1--1,,1|(-24,60)|
+1,224,185,222,1,0,0,0,0,128,0,-1--1--1,,1|(188,-55)|
+1,225,204,222,1,0,0,0,0,128,0,-1--1--1,,1|(49,-8)|
+1,226,222,6,1,0,0,0,0,128,0,-1--1--1,,1|(89,105)|
+10,227,"prob-infect",1,108,45,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,228,227,6,1,0,0,0,0,128,0,-1--1--1,,1|(133,193)|
+1,229,22,35,0,0,0,0,0,128,0,-1--1--1,,1|(557,676)|
+1,230,22,30,1,0,0,0,0,128,0,-1--1--1,,1|(856,684)|
+1,231,14,76,1,0,0,0,0,128,0,-1--1--1,,1|(473,476)|
+1,232,14,20,1,0,0,0,0,128,0,-1--1--1,,1|(656,461)|
+1,233,14,25,1,0,0,0,0,128,0,-1--1--1,,1|(496,557)|
+10,234,"move-short-impact",-43,-103,60,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,235,"move-long-impact",-115,-32,57,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,236,234,204,0,0,0,0,0,128,0,-1--1--1,,1|(-4,-89)|
+1,237,235,204,0,0,0,0,0,128,0,-1--1--1,,1|(-37,-53)|
+10,238,"self-isolating",2533,905,39,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,239,90,238,0,0,0,0,0,128,0,-1--1--1,,1|(2540,867)|
+1,240,88,238,0,0,0,0,0,128,0,-1--1--1,,1|(2421,872)|
+1,241,209,185,1,0,0,0,0,128,0,-1--1--1,,1|(296,-204)|
+10,242,"prob-DH",2933,921,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,243,DfromDH,2936,961,44,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,244,"trigger-type",-15,-468,37,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,245,"trigger-level",-7,-376,40,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,246,"tot-n-exposed",-287,260,56,19,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,247,48,-131,268,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,248,250,246,4,0,0,22,0,0,0,-1--1--1,,1|(-205,261)|
+1,249,250,247,100,0,0,22,0,0,0,-1--1--1,,1|(-152,261)|
+11,250,48,-171,261,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,251,"tot-n-exposed increase",-171,292,48,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,252,7,251,1,0,0,0,0,128,0,-1--1--1,,1|(-8,273)|
+10,253,"Initial tot-n-exposed",-312,356,48,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,254,253,246,0,0,0,0,0,64,1,-1--1--1,,1|(-301,316)|
+10,255,"tot-n-exposed",-111,-359,56,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,256,Time,-292,-443,28,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,257,"total-hosp+crit",96,-395,56,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,258,"check-triggered?",-115,-427,53,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,259,256,258,1,0,0,0,0,64,0,-1--1--1,,1|(-203,-427)|
+1,260,245,258,0,0,0,0,0,64,0,-1--1--1,,1|(-52,-396)|
+1,261,244,258,1,0,0,0,0,64,0,-1--1--1,,1|(-56,-447)|
+1,262,255,258,0,0,0,0,0,128,0,-1--1--1,,1|(-112,-384)|
+1,263,257,258,0,0,0,0,0,128,0,-1--1--1,,1|(-4,-409)|
+10,264,"time-triggered",-255,-583,44,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,265,Days per week,-228,-755,57,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,266,"time-triggered?",-204,-663,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,267,58,266,0,0,0,0,0,128,0,-1--1--1,,1|(-172,-580)|
+1,268,265,266,0,0,0,0,0,128,0,-1--1--1,,1|(-217,-715)|
+1,269,84,266,0,0,0,0,0,128,0,-1--1--1,,1|(-261,-695)|
+1,270,266,264,0,0,0,0,0,64,0,-1--1--1,,1|(-225,-628)|
+1,271,258,58,1,0,0,0,0,64,0,-1--1--1,,1|(-152,-467)|
+1,272,264,58,1,0,0,0,0,64,0,-1--1--1,,1|(-232,-548)|
+1,273,244,58,1,0,0,0,0,64,0,-1--1--1,,1|(-88,-483)|
+10,274,"time-triggered",2413,1461,53,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,275,274,200,0,0,0,0,0,128,0,-1--1--1,,1|(2476,1449)|
+10,276,"begin-trigger",-347,-544,40,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,277,264,276,0,0,0,0,0,128,0,-1--1--1,,1|(-292,-564)|
+1,278,58,276,1,0,0,0,0,128,0,-1--1--1,,1|(-255,-524)|
+1,279,256,276,1,0,0,0,0,128,0,-1--1--1,,1|(-340,-495)|
+10,280,TIME STEP,-391,-475,52,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,281,280,276,0,0,0,0,0,64,0,-1--1--1,,1|(-372,-503)|
+10,282,"begin-trigger",2773,1428,49,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,283,282,200,0,0,0,0,0,128,0,-1--1--1,,1|(2667,1431)|
+10,284,People needing hospital recovering at home,888,252,80,19,8,2,0,3,0,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,285,People needing hospital dying at home,681,165,75,19,8,2,0,3,0,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,286,People dying at home,732,248,56,19,8,2,0,3,0,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,287,People needing hospital recovering at home,3041,745,80,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,288,"contact-age-homofily",2056,1168,43,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,289,"average-time-tobe-exposed",1945,552,52,27,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,290,People needing hospital recovering at home,2780,345,80,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,291,"self-isolating",2256,288,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,292,Hospitalisation,2681,136,55,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,293,TIME STEP,2836,1284,52,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,294,Time,2196,1065,28,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,295,"transmitter-distr",1893,765,59,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,296,"low-risk-needed",121,-780,52,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,297,"prop-risk",244,-827,55,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,298,297,296,0,0,0,0,0,128,0,-1--1--1,,1|(192,-805)|
+1,299,65,296,0,0,0,0,0,128,0,-1--1--1,,1|(119,-735)|
+10,300,"high-risk-shielding?",-47,-756,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,301,300,62,1,0,0,0,0,128,0,-1--1--1,,1|(-12,-723)|
+1,302,296,62,1,0,0,0,0,128,0,-1--1--1,,1|(76,-731)|
+10,303,Infectious transmitters,880,-227,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,304,303,185,1,0,0,0,0,128,0,-1--1--1,,1|(748,-200)|
+10,305,"average-time-tobe-infectious",2009,420,40,32,8,130,0,3,0,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,306,Infectious transmitters distr,1057,-203,53,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,307,303,306,0,0,0,0,0,128,0,-1--1--1,,1|(953,-216)|
+10,308,average time before symptoms,2193,656,63,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,309,105,308,0,0,0,0,0,128,0,-1--1--1,,1|(2233,717)|
+1,310,289,308,1,0,0,0,0,128,0,-1--1--1,,1|(2037,604)|
+10,311,average time before symptoms,1205,-324,68,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,312,Previous infectious transmitter distr,1208,-232,59,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,313,306,312,0,0,0,0,0,128,0,-1--1--1,,1|(1124,-215)|
+1,314,311,312,0,0,0,0,0,128,0,-1--1--1,,1|(1205,-284)|
+10,315,Becomming infectious asymptomatic,1069,76,76,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,316,"Infectious pre-symptomatic",248,341,68,23,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,317,Infectious asymptomatic,569,25,55,31,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,318,Infectious symptomatic,537,333,57,32,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,319,321,316,4,0,0,22,0,0,0,-1--1--1,,1|(236,299)|
+1,320,321,2,100,0,0,22,0,0,0,-1--1--1,,1|(236,245)|
+11,321,332,236,273,8,8,33,3,0,0,2,0,0,0,0,0,0,0,0,0
+10,322,Becomming infectious symptomatic,169,273,69,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,323,9,317,4,0,0,22,0,0,0,-1--1--1,,1|(384,29)|
+1,324,12,317,100,0,0,22,0,0,0,-1--1--1,,1|(692,20)|
+1,325,327,318,4,0,0,22,0,0,0,-1--1--1,,1|(432,333)|
+1,326,327,316,100,0,0,22,0,0,0,-1--1--1,,1|(344,333)|
+11,327,1454,376,333,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,328,Becomming symptomatic,376,364,41,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,329,16,318,100,0,0,22,0,0,0,-1--1--1,,1|(533,392)|
+1,330,332,3,4,0,0,22,0,0,0,-1--1--1,,1|(1064,273)|
+1,331,332,318,100,0,0,22,0,0,0,-1--1--1,,1|(825,333)|
+11,332,4072,1064,333,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,333,Recover symptomatic,1064,360,41,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,334,48,532,185,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,335,337,334,4,0,0,22,0,0,0,-1--1--1,,1|(532,216)|
+1,336,337,318,100,0,0,22,0,0,0,-1--1--1,,1|(532,280)|
+11,337,48,532,248,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,338,Die at home,585,248,39,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,339,"mild-asymptomatic",312,113,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,340,339,9,0,0,0,0,0,128,0,-1--1--1,,1|(277,69)|
+1,341,10,12,1,0,0,0,0,128,0,-1--1--1,,1|(580,-16)|
+1,342,317,13,1,0,0,0,0,128,0,-1--1--1,,1|(637,57)|
+10,343,"average-time-tobe-infectious-toImmune",909,137,67,36,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,344,343,13,0,0,0,0,0,128,0,-1--1--1,,1|(827,80)|
+10,345,Initial Infectious asymptomatic,700,104,52,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,346,345,317,0,0,0,0,0,64,1,-1--1--1,,1|(652,76)|
+1,347,316,328,1,0,0,0,0,128,0,-1--1--1,,1|(317,376)|
+10,348,"when-symptoms-if-I",577,387,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,349,348,328,0,0,0,0,0,128,0,-1--1--1,,1|(483,376)|
+10,350,"Initial infectious pre-symptomatic",249,400,56,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,351,350,316,0,0,0,0,0,64,1,-1--1--1,,1|(249,379)|
+10,352,People getting slight symptoms,121,440,68,19,8,2,0,3,0,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,353,People getting sick,312,297,52,19,8,2,0,3,0,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,354,352,322,1,0,0,0,0,128,0,-1--1--1,,1|(129,360)|
+1,355,353,321,0,0,0,0,0,128,0,-1--1--1,,1|(259,280)|
+1,356,352,328,1,0,0,0,0,128,0,-1--1--1,,1|(345,400)|
+1,357,353,327,1,0,0,0,0,128,0,-1--1--1,,1|(336,305)|
+10,358,perc of people with symptoms getting sick,1080,437,76,19,8,130,0,3,0,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,359,Initial infectious symptomatic,689,296,49,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,360,359,318,0,0,0,0,0,64,1,-1--1--1,,1|(623,311)|
+1,361,286,338,0,0,0,0,0,128,0,-1--1--1,,1|(657,248)|
+1,362,285,338,0,0,0,0,0,128,0,-1--1--1,,1|(633,205)|
+1,363,284,332,0,0,0,0,0,128,0,-1--1--1,,1|(988,297)|
+1,364,343,332,0,0,0,0,0,128,0,-1--1--1,,1|(993,244)|
+1,365,318,333,1,0,0,0,0,128,0,-1--1--1,,1|(801,345)|
+10,366,Becomming symptomatic,2217,944,45,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,367,Infectious,545,136,31,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,368,316,367,1,0,0,0,0,128,0,-1--1--1,,1|(361,216)|
+1,369,318,367,1,0,0,0,0,128,0,-1--1--1,,1|(512,232)|
+1,370,317,367,0,0,0,0,0,128,0,-1--1--1,,1|(556,83)|
+10,371,Infectious,1785,1361,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,372,371,189,0,0,0,0,0,128,0,-1--1--1,,1|(1887,1353)|
+10,373,Recover symptomatic,1437,980,45,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,374,373,72,0,0,0,0,0,128,0,-1--1--1,,1|(1360,1004)|
+10,375,Recover from general wards,1008,1097,49,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,376,375,72,1,0,0,0,0,128,0,-1--1--1,,1|(1121,1056)|
+1,377,6,10,1,0,0,0,0,128,0,-1--1--1,,1|(160,101)|
+10,378,"Infectious pre-symptomatic",1156,-136,59,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,379,Infectious,809,-300,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,380,379,303,0,0,0,0,0,128,0,-1--1--1,,1|(835,-272)|
+1,381,379,185,0,0,0,0,0,128,0,-1--1--1,,1|(737,-276)|
+10,382,People getting slight symptoms,1365,357,68,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,383,Die at home,3029,857,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,384,382,332,0,0,0,0,0,128,0,-1--1--1,,1|(1192,343)|
+10,385,"prob-DH",188,-36,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,386,385,10,0,0,0,0,0,128,0,-1--1--1,,1|(204,-24)|
+1,387,348,333,1,0,0,0,0,128,0,-1--1--1,,1|(796,361)|
+10,388,Infectious symptomatic,2465,241,45,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,389,"SI-isolation-duration",1532,1240,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,390,"isolation-efficacy",809,-143,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,391,non isolated in hospital,180,-267,72,19,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,392,186,391,0,0,0,0,0,128,0,-1--1--1,,1|(168,-301)|
+1,393,44,391,0,0,0,0,0,128,0,-1--1--1,,1|(36,-219)|
+1,394,187,391,0,0,0,0,0,128,0,-1--1--1,,1|(251,-297)|
+1,395,391,185,1,0,0,0,0,128,0,-1--1--1,,1|(413,-299)|
+1,396,390,303,0,0,0,0,0,128,0,-1--1--1,,1|(839,-180)|
+10,397,"isolate-inform?",-155,472,56,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,398,"self-isolating",453,409,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,399,398,328,1,0,0,0,0,128,0,-1--1--1,,1|(416,381)|
+1,400,379,312,1,0,0,0,0,128,1,-1--1--1,,1|(1005,-336)|
+10,401,Dead,-235,765,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,402,48,-480,765,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,403,405,401,4,0,0,22,0,0,0,-1--1--1,,1|(-319,765)|
+1,404,405,402,100,0,0,22,0,0,0,-1--1--1,,1|(-424,765)|
+11,405,48,-371,765,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,406,People dying,-371,784,41,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,407,Die at critical care,-411,853,47,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,408,Die at home,-263,872,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,409,Die in hospital,-156,825,56,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,410,409,406,0,0,0,0,0,128,0,-1--1--1,,1|(-264,804)|
+1,411,408,406,0,0,0,0,0,128,0,-1--1--1,,1|(-311,832)|
+1,412,407,406,1,0,0,0,0,128,0,-1--1--1,,1|(-379,797)|
+10,413,Initial dead people,-155,673,60,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,414,413,401,0,0,0,0,0,64,1,-1--1--1,,1|(-185,709)|
+10,415,Symptomatic transmitters,8,-279,44,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,416,391,415,1,0,0,0,0,128,0,-1--1--1,,1|(109,-279)|
+10,417,Infectious symptomatic,-128,-263,45,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,418,417,415,1,0,0,0,0,128,0,-1--1--1,,1|(-63,-267)|
+1,419,44,415,0,0,0,0,0,128,0,-1--1--1,,1|(-40,-220)|
+10,420,Perc of symptomatic transmitters,224,-347,68,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,421,415,420,1,0,0,0,0,128,0,-1--1--1,,1|(116,-339)|
+1,422,185,420,1,0,0,0,0,128,0,-1--1--1,,1|(545,-299)|
+10,423,informers,1580,348,39,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,424,Chance of being informed on infection,433,-367,67,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,425,420,424,1,0,0,0,0,128,0,-1--1--1,,1|(324,-376)|
+10,426,Chance of being informed on infection,-11,136,71,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,427,426,6,0,0,0,0,0,128,0,-1--1--1,,1|(80,177)|
+10,428,Perc of presymptomatic transmitters during infection,581,-163,88,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,429,185,428,0,0,0,0,0,128,0,-1--1--1,,1|(624,-216)|
+10,430,"Infectious pre-symptomatic",604,-71,59,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,431,430,428,1,0,0,0,0,128,0,-1--1--1,,1|(601,-123)|
+10,432,"when-symptoms-if-I",472,-60,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,433,432,428,0,0,0,0,0,128,0,-1--1--1,,1|(521,-107)|
+1,434,390,428,1,0,0,0,0,128,0,-1--1--1,,1|(700,-131)|
+10,435,Chance of being informed on becomming symptomatic,396,-115,89,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,436,428,435,1,0,0,0,0,128,0,-1--1--1,,1|(473,-148)|
+10,437,"informer?",548,-320,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,438,437,424,1,0,0,0,0,128,0,-1--1--1,,1|(524,-363)|
+1,439,437,435,1,0,0,0,0,128,0,-1--1--1,,1|(479,-227)|
+1,440,88,183,1,0,0,0,0,128,0,-1--1--1,,1|(2133,928)|
+1,441,443,2,4,0,0,22,2,0,0,-1--1--1,|12||0-0-0,3|(437,161)|(393,161)|(353,161)|
+1,442,443,2,100,0,0,22,0,0,0,-1--1--1,,1|(371,193)|
+11,443,3676,437,193,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,444,Getting informed of infection,437,220,61,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,445,435,10,1,0,0,0,0,128,0,-1--1--1,,1|(360,-63)|
+10,446,Chance of being informed on becomming symptomatic,425,277,80,32,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,447,446,444,1,0,0,0,0,128,0,-1--1--1,,1|(505,248)|
+1,448,7,444,1,0,0,0,0,128,0,-1--1--1,,1|(297,240)|
+1,449,443,9,1,0,0,0,0,128,0,-1--1--1,,1|(281,40)|
+1,450,432,10,0,0,0,0,0,128,0,-1--1--1,,1|(380,-33)|
+1,451,2,444,0,0,0,0,0,64,0,-1--1--1,,1|(340,204)|
+1,452,432,444,1,0,0,0,0,128,0,-1--1--1,,1|(489,81)|
+10,453,"found-and-isolate",309,-176,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,454,453,435,0,0,0,0,0,128,0,-1--1--1,,1|(348,-148)|
+1,455,453,424,0,0,0,0,0,128,0,-1--1--1,,1|(368,-264)|
+10,456,Exposed,1840,1244,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,457,456,189,0,0,0,0,0,128,0,-1--1--1,,1|(1921,1292)|
+1,458,398,333,0,0,0,0,0,128,0,-1--1--1,,1|(755,385)|
+10,459,"prevalence-all",1004,-728,44,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,460,"week-E",701,-684,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,461,48,480,-684,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,462,464,460,4,0,0,22,0,0,0,-1--1--1,,1|(624,-684)|
+1,463,464,461,100,0,0,22,0,0,0,-1--1--1,,1|(529,-684)|
+11,464,48,576,-684,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,465,"Increase week-E",576,-663,56,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,466,48,888,-683,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,467,469,466,4,0,0,22,0,0,0,-1--1--1,,1|(847,-680)|
+1,468,469,460,100,0,0,22,0,0,0,-1--1--1,,1|(771,-680)|
+11,469,48,809,-680,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,470,"Decrease week-E",809,-659,57,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,471,Exposing,545,-772,39,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,472,471,464,0,0,0,0,0,128,0,-1--1--1,,1|(560,-732)|
+10,473,Initial week E,701,-643,43,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,474,473,460,0,0,0,0,0,64,1,-1--1--1,,1|(701,-652)|
+10,475,week,773,-751,19,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,476,"effective-R",713,-823,35,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,477,Infectious,872,-792,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,478,460,476,0,0,0,0,0,128,0,-1--1--1,,1|(708,-751)|
+1,479,475,476,0,0,0,0,0,128,0,-1--1--1,,1|(747,-781)|
+10,480,Becomming infectious asymptomatic,1077,-955,76,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,481,Becomming infectious symptomatic,977,-896,77,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,482,"tot-n-infectious",681,-960,64,21,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,483,48,865,-963,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,484,486,482,4,0,0,22,0,0,0,-1--1--1,,1|(769,-963)|
+1,485,486,483,100,0,0,22,0,0,0,-1--1--1,,1|(832,-963)|
+11,486,48,801,-963,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,487,"new-I",801,-940,20,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,488,480,487,0,0,0,0,0,128,0,-1--1--1,,1|(917,-944)|
+1,489,481,487,1,0,0,0,0,128,0,-1--1--1,,1|(861,-920)|
+10,490,"initial tot-n-infectious",636,-1028,48,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,491,490,482,0,0,0,0,0,128,1,-1--1--1,,1|(653,-1000)|
+10,492,"tot-days-infectious",1428,-784,72,23,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,493,48,1164,-787,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,494,496,492,4,0,0,22,0,0,0,-1--1--1,,1|(1316,-787)|
+1,495,496,493,100,0,0,22,0,0,0,-1--1--1,,1|(1215,-787)|
+11,496,48,1264,-787,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,497,"Increase tot-days-infectious",1264,-764,59,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,498,480,496,1,0,0,0,0,128,0,-1--1--1,,1|(1208,-876)|
+10,499,"average-time-tobe-infectious-toImmune",1173,-684,71,29,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,500,"average-time-tobe-infectious-toDead",1284,-635,65,24,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,501,"average-time-tobe-infectious-toHospital",1401,-679,68,29,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,502,499,497,0,0,0,0,0,128,0,-1--1--1,,1|(1220,-724)|
+1,503,501,497,0,0,0,0,0,128,0,-1--1--1,,1|(1332,-720)|
+1,504,500,497,0,0,0,0,0,128,0,-1--1--1,,1|(1276,-695)|
+10,505,People getting sick,1244,-964,52,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,506,People getting slight symptoms,1388,-960,68,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,507,506,496,0,0,0,0,0,128,0,-1--1--1,,1|(1325,-872)|
+1,508,505,496,0,0,0,0,0,128,0,-1--1--1,,1|(1253,-876)|
+10,509,"initial tot-days-infectious",1452,-843,59,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,510,509,492,0,0,0,0,0,128,1,-1--1--1,,1|(1443,-821)|
+10,511,DfromDH,1453,-723,44,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,512,511,497,1,0,0,0,0,128,0,-1--1--1,,1|(1389,-732)|
+10,513,incidence,465,-767,32,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,514,"total-population",373,-823,59,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,515,514,513,0,0,0,0,0,128,0,-1--1--1,,1|(413,-796)|
+1,516,464,513,0,0,0,0,0,128,0,-1--1--1,,1|(532,-717)|
+10,517,"prevalence-I",928,-599,40,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,518,"total-hosp+crit",1085,-588,56,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,519,518,517,0,0,0,0,0,128,0,-1--1--1,,1|(1005,-592)|
+10,520,Exposed,1117,-736,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,521,520,459,0,0,0,0,0,128,0,-1--1--1,,1|(1069,-733)|
+1,522,518,459,1,0,0,0,0,128,0,-1--1--1,,1|(1097,-651)|
+10,523,"total-population",1000,-648,59,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,524,523,517,0,0,0,0,0,128,0,-1--1--1,,1|(969,-627)|
+1,525,523,459,0,0,0,0,0,128,0,-1--1--1,,1|(1001,-681)|
+10,526,"max-incidence",341,-743,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,527,513,526,0,0,0,0,0,128,0,-1--1--1,,1|(420,-757)|
+10,528,"max-prevalance-all",1017,-772,60,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,529,459,528,0,0,0,0,0,128,0,-1--1--1,,1|(1008,-743)|
+10,530,impact,268,-895,24,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,531,"Increase week-E",-52,1328,32,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,532,Lose immunity,333,1224,55,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,533,perc of episodeless,-59,1197,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,534,initial episodeless susceptible,-164,1108,55,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,535,Initial Susceptible,-24,1085,44,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,536,episodeless susceptible,-192,1172,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,537,lost immunity,64,1152,53,21,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,538,537,533,0,0,0,0,0,128,0,-1--1--1,,1|(4,1176)|
+1,539,536,533,0,0,0,0,0,128,0,-1--1--1,,1|(-128,1183)|
+1,540,535,537,0,0,0,0,0,128,1,-1--1--1,,1|(13,1113)|
+1,541,534,536,0,0,0,0,0,128,1,-1--1--1,,1|(-172,1133)|
+1,542,534,537,0,0,0,0,0,128,1,-1--1--1,,1|(-55,1128)|
+12,543,48,240,1148,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,544,546,537,4,0,0,22,0,0,0,-1--1--1,,1|(141,1148)|
+1,545,546,543,100,0,0,22,0,0,0,-1--1--1,,1|(205,1148)|
+11,546,48,172,1148,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,547,increase lost immunity,172,1177,40,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,548,48,64,1341,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,549,551,548,4,0,0,22,0,0,0,-1--1--1,,1|(64,1296)|
+1,550,551,537,100,0,0,22,0,0,0,-1--1--1,,1|(64,1208)|
+11,551,48,64,1252,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,552,decrease lost immunity,116,1252,44,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,553,48,-191,1333,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,554,556,553,4,0,0,22,0,0,0,-1--1--1,,1|(-191,1297)|
+1,555,556,536,100,0,0,22,0,0,0,-1--1--1,,1|(-191,1224)|
+11,556,48,-191,1261,8,8,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,557,decreae episodeless suceptible,-119,1261,64,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,558,533,557,0,0,0,0,0,128,0,-1--1--1,,1|(-83,1223)|
+1,559,533,551,1,0,0,0,0,128,0,-1--1--1,,1|(-15,1240)|
+1,560,532,547,0,0,0,0,0,128,0,-1--1--1,,1|(261,1204)|
+1,561,531,557,0,0,0,0,0,128,0,-1--1--1,,1|(-80,1299)|
+1,562,531,551,0,0,0,0,0,128,0,-1--1--1,,1|(11,1288)|
+10,563,episodeless susceptible,160,-948,44,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,564,563,530,0,0,0,0,0,128,0,-1--1--1,,1|(216,-920)|
+1,565,514,530,0,0,0,0,0,128,0,-1--1--1,,1|(327,-855)|
+10,566,"new-R",809,-1091,23,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,567,Recover at home,729,-1207,40,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,568,Recover from critical care,816,-1207,49,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,569,Recover from general wards,897,-1227,49,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,570,Recover symptomatic,612,-1184,45,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,571,570,566,0,0,0,0,0,128,0,-1--1--1,,1|(712,-1136)|
+1,572,567,566,0,0,0,0,0,128,0,-1--1--1,,1|(767,-1148)|
+1,573,568,566,0,0,0,0,0,128,0,-1--1--1,,1|(812,-1151)|
+1,574,569,566,0,0,0,0,0,128,0,-1--1--1,,1|(856,-1160)|
+10,575,"new-D",896,-1099,23,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,576,People dying,973,-1148,52,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,577,576,575,0,0,0,0,0,128,0,-1--1--1,,1|(940,-1127)|
+10,578,"admissions-critical",-328,-1060,57,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,579,Hospitalisation,-364,-1127,55,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,580,Condition worsens,-436,-1007,36,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,581,580,578,0,0,0,0,0,128,0,-1--1--1,,1|(-381,-1033)|
+10,582,"total-infectious",864,-744,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,583,477,582,1,0,0,0,0,128,0,-1--1--1,,1|(860,-759)|
+1,584,582,476,0,0,0,0,0,128,0,-1--1--1,,1|(796,-780)|
+1,585,582,517,1,0,0,0,0,128,0,-1--1--1,,1|(917,-683)|
+1,586,582,459,0,0,0,0,0,128,0,-1--1--1,,1|(929,-736)|
+10,587,"total-hospitalised",373,629,53,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,588,14,587,0,0,0,0,0,128,0,-1--1--1,,1|(456,563)|
+1,589,587,132,1,0,0,0,0,128,0,-1--1--1,,1|(324,660)|
+10,590,"total-critical",404,661,40,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,591,22,590,0,0,0,0,0,128,0,-1--1--1,,1|(468,644)|
+1,592,590,132,1,0,0,0,0,128,0,-1--1--1,,1|(353,668)|
+10,593,"total-dead",-131,728,33,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,594,401,593,0,0,0,0,0,128,0,-1--1--1,,1|(-184,747)|
+10,595,Mix R0,533,-844,25,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,596,"pp-patch",533,-936,32,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,597,596,595,0,0,0,0,0,128,0,-1--1--1,,1|(533,-897)|
+10,598,"tot-days-exposed",-324,201,56,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,599,246,598,0,0,0,0,0,128,0,-1--1--1,,1|(-303,232)|
+10,600,"average-time-tobe-exposed",-411,117,40,32,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,601,600,598,1,0,0,0,0,128,0,-1--1--1,,1|(-335,148)|
+10,602,E days,-452,240,23,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,603,598,602,0,0,0,0,0,128,0,-1--1--1,,1|(-387,220)|
+1,604,246,602,0,0,0,0,0,128,0,-1--1--1,,1|(-379,248)|
+10,605,I days,828,-852,21,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,606,482,605,0,0,0,0,0,128,0,-1--1--1,,1|(755,-905)|
+1,607,492,605,0,0,0,0,0,128,0,-1--1--1,,1|(1109,-819)|
+1,608,605,476,0,0,0,0,0,128,0,-1--1--1,,1|(784,-840)|
+10,609,HC LoS,128,-1088,28,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,610,"tot-days-hospcrit",-4,-1055,68,21,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,611,"tot-n-hospcrit",-7,-1131,61,20,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+12,612,48,-232,-1143,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,613,615,611,4,0,0,22,0,0,0,-1--1--1,,1|(-104,-1144)|
+1,614,615,612,100,0,0,22,0,0,0,-1--1--1,,1|(-189,-1144)|
+11,615,48,-148,-1144,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,616,"admissions-hospital",-148,-1115,40,20,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,617,579,616,0,0,0,0,0,128,0,-1--1--1,,1|(-255,-1120)|
+12,618,48,-227,-1052,12,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,619,621,610,4,0,0,22,0,0,0,-1--1--1,,1|(-104,-1052)|
+1,620,621,618,100,0,0,22,0,0,0,-1--1--1,,1|(-184,-1052)|
+11,621,48,-144,-1052,8,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,622,tot days hospcrit increase,-144,-1023,53,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,623,616,621,0,0,0,0,0,128,0,-1--1--1,,1|(-144,-1083)|
+1,624,578,622,1,0,0,0,0,128,0,-1--1--1,,1|(-243,-1032)|
+10,625,"initial tot-n-hospcrit",-48,-1255,44,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,626,625,611,0,0,0,0,0,128,1,-1--1--1,,1|(-29,-1200)|
+10,627,"initial tot-days-hospcrit",140,-999,55,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,628,627,610,0,0,0,0,0,128,1,-1--1--1,,1|(80,-1023)|
+10,629,"average-time-tobe-hospital-toCritical",-304,-996,67,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,630,629,622,0,0,0,0,0,128,0,-1--1--1,,1|(-223,-1009)|
+10,631,"average-time-tobe-hospital-toDead",-287,-932,64,17,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,632,"average-time-tobe-hospital-toImmune",-292,-856,67,23,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,633,"average-time-tobe-critical-toDead",12,-984,64,31,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,634,"average-time-tobe-critical-toImmune",12,-915,65,20,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,635,633,622,0,0,0,0,0,128,0,-1--1--1,,1|(-64,-1000)|
+1,636,634,622,0,0,0,0,0,128,0,-1--1--1,,1|(-60,-965)|
+1,637,631,622,0,0,0,0,0,128,0,-1--1--1,,1|(-220,-972)|
+1,638,632,622,1,0,0,0,0,128,0,-1--1--1,,1|(-204,-940)|
+10,639,"prob-CritDeath",-204,-823,60,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,640,"prob-HospCrit",-115,-859,57,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,641,"prob-HospDeath",-31,-843,65,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,642,639,622,0,0,0,0,0,128,0,-1--1--1,,1|(-177,-912)|
+1,643,640,622,0,0,0,0,0,128,0,-1--1--1,,1|(-124,-928)|
+1,644,641,622,0,0,0,0,0,128,0,-1--1--1,,1|(-80,-920)|
+1,645,610,609,0,0,0,0,0,128,0,-1--1--1,,1|(76,-1072)|
+1,646,611,609,0,0,0,0,0,128,0,-1--1--1,,1|(71,-1104)|
+10,647,"Community IFR%",2020,-127,57,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,648,95,647,0,0,0,0,0,128,0,-1--1--1,,1|(1963,-97)|
+10,649,"Hospital IFR%",1681,-119,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,650,"prob-CritDeath",1561,-43,60,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,651,"prob-HospCrit",1520,-156,57,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,652,"prob-HospDeath",1664,-59,65,9,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,653,650,649,1,0,0,0,0,128,0,-1--1--1,,1|(1604,-96)|
+1,654,652,649,0,0,0,0,0,128,0,-1--1--1,,1|(1669,-81)|
+1,655,651,649,0,0,0,0,0,128,0,-1--1--1,,1|(1593,-139)|
+10,656,"Overall IFR%",1792,-72,45,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,657,95,656,0,0,0,0,0,128,0,-1--1--1,,1|(1861,-73)|
+1,658,96,656,1,0,0,0,0,128,0,-1--1--1,,1|(1800,-16)|
+1,659,649,656,0,0,0,0,0,128,0,-1--1--1,,1|(1729,-96)|
+10,660,"CFR%",1685,4,24,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,661,656,660,0,0,0,0,0,128,0,-1--1--1,,1|(1744,-36)|
+1,662,96,660,0,0,0,0,0,128,0,-1--1--1,,1|(1745,8)|
+1,663,89,660,0,0,0,0,0,128,0,-1--1--1,,1|(1629,16)|
+1,664,80,200,1,0,0,0,0,128,0,-1--1--1,,1|(2460,1376)|
+1,665,82,204,0,0,0,0,0,128,0,-1--1--1,,1|(100,-92)|
+1,666,83,204,0,0,0,0,0,128,0,-1--1--1,,1|(-27,-75)|
+10,667,"triggered?",-108,13,41,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,668,667,204,1,0,0,0,0,128,0,-1--1--1,,1|(-23,-31)|
+10,669,"transmission-parameter",405,-911,47,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,670,669,595,0,0,0,0,0,128,0,-1--1--1,,1|(469,-876)|
+1,671,605,595,0,0,0,0,0,128,0,-1--1--1,,1|(689,-848)|
+10,672,day unit correction,533,-816,60,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,673,672,595,0,0,0,0,0,64,0,-1--1--1,,1|(533,-823)|
+10,674,people unit correction,605,-900,35,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,675,674,595,0,0,0,0,0,128,0,-1--1--1,,1|(569,-872)|
+10,676,people unit correction,-279,-396,40,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,677,day unit correction,-247,-343,37,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,678,677,258,0,0,0,0,0,128,0,-1--1--1,,1|(-180,-385)|
+1,679,676,258,0,0,0,0,0,128,0,-1--1--1,,1|(-208,-408)|
+10,680,Uncertain,205,-1263,31,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,681,FINAL TIME,369,-1111,55,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,682,"non-iso population",1660,1321,60,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,683,193,682,1,0,0,0,0,128,0,-1--1--1,,1|(1804,1192)|
+1,684,456,682,1,0,0,0,0,128,0,-1--1--1,,1|(1733,1245)|
+1,685,191,682,1,0,0,0,0,128,0,-1--1--1,,1|(1725,1304)|
+1,686,371,682,0,0,0,0,0,128,0,-1--1--1,,1|(1729,1343)|
+1,687,192,682,1,0,0,0,0,128,0,-1--1--1,,1|(1741,1389)|
+1,688,190,682,1,0,0,0,0,128,0,-1--1--1,,1|(1752,1484)|
+10,689,"isolation-efficacy",1464,1400,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,690,689,682,1,0,0,0,0,128,0,-1--1--1,,1|(1540,1353)|
+10,691,"prop-risk",-472,369,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,692,36,1,1,0,0,0,0,128,1,-1--1--1,,1|(-72,217)|
+1,693,37,2,0,0,0,0,0,128,1,-1--1--1,,1|(145,280)|
+10,694,"total-dead",340,-771,44,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,695,694,513,0,0,0,0,0,128,0,-1--1--1,,1|(404,-769)|
+1,696,694,530,0,0,0,0,0,128,0,-1--1--1,,1|(309,-824)|
+10,697,Normal decrease week E,648,-615,55,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,698,465,697,0,0,0,0,0,128,0,-1--1--1,,1|(599,-644)|
+1,699,697,470,1,0,0,0,0,128,0,-1--1--1,,1|(780,-620)|
+1,700,475,697,0,0,0,0,0,64,0,-1--1--1,,1|(720,-692)|
+10,701,lookup decrease week E,817,-583,53,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,702,701,470,0,0,0,0,0,64,0,-1--1--1,,1|(813,-616)|
+10,703,Time,901,-552,28,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,704,703,470,0,0,0,0,0,128,0,-1--1--1,,1|(859,-600)|
+10,705,initial perc of infsymp recover,948,417,51,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,706,705,333,1,0,0,0,0,128,0,-1--1--1,,1|(1029,420)|
+10,707,initial perc of infsymp hosp,857,388,44,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,708,707,17,1,0,0,0,0,128,0,-1--1--1,,1|(656,396)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Infection flows
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,60,0
+10,1,People needing hospital recovering at home,360,677,75,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,"average-time-tobe-hospital-toImmune",240,605,120,9,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,2,1,0,0,0,0,0,0,0,-1--1--1,,1|(285,632)|
+10,4,"death-no-bed",120,772,44,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,5,4,1,1,0,0,0,0,0,0,-1--1--1,,1|(212,713)|
+10,6,Infection becomes severe,656,605,60,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,People needing hospital dying at home,344,756,71,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,"average-time-tobe-hospital-toCritical",301,865,120,9,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,9,8,7,0,0,0,0,0,0,0,-1--1--1,,1|(317,821)|
+1,10,4,7,1,0,0,0,0,0,0,-1--1--1,,1|(213,785)|
+10,11,"average-time-tobe-infectious-toHospital",556,516,64,28,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,11,6,1,0,0,0,0,0,0,-1--1--1,,1|(620,557)|
+10,13,DfromDH,1015,541,44,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,14,13,6,0,0,0,0,0,0,0,-1--1--1,,1|(852,569)|
+10,15,"prob-DH",969,309,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,16,People dying at home,992,777,49,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,17,"average-time-tobe-infectious-toDead",1156,593,64,27,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,17,16,1,0,0,0,0,0,0,-1--1--1,,1|(1120,703)|
+1,19,13,16,1,0,0,0,0,0,0,-1--1--1,,1|(1035,641)|
+10,20,"perc-people-going-toHospital",584,837,61,28,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,21,Beds per person,424,972,36,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,22,21,20,0,0,0,0,0,0,0,-1--1--1,,1|(492,912)|
+10,23,"blocked-bed-effect?",537,961,44,20,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,24,23,20,0,0,0,0,0,0,0,-1--1--1,,1|(556,909)|
+10,25,Daily free beds,365,928,57,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,26,25,20,0,0,0,0,0,0,0,-1--1--1,,1|(451,892)|
+1,27,6,20,0,0,0,0,0,0,0,-1--1--1,,1|(623,709)|
+10,28,"average-time-tobe-infectious-toImmune",1112,383,125,9,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,29,6,7,1,0,0,0,0,128,0,-1--1--1,,1|(521,708)|
+1,30,6,1,0,0,0,0,0,128,0,-1--1--1,,1|(524,636)|
+1,31,20,1,1,0,0,0,0,128,0,-1--1--1,,1|(500,745)|
+1,32,20,7,1,0,0,0,0,128,0,-1--1--1,,1|(456,804)|
+10,33,"average-time-tobe-infectious",776,405,49,25,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,34,Previous infectious transmitter distr,593,277,64,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,35,34,33,0,0,0,0,0,128,0,-1--1--1,,1|(676,333)|
+1,36,11,33,0,0,0,0,0,128,0,-1--1--1,,1|(663,460)|
+1,37,28,33,0,0,0,0,0,128,0,-1--1--1,,1|(912,395)|
+1,38,17,33,1,0,0,0,0,128,0,-1--1--1,,1|(996,460)|
+1,39,15,33,0,0,0,0,0,128,0,-1--1--1,,1|(892,348)|
+1,40,13,33,0,0,0,0,0,128,0,-1--1--1,,1|(913,483)|
+10,41,Infectious symptomatic,780,788,49,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,42,41,6,0,0,0,0,0,128,0,-1--1--1,,1|(721,701)|
+10,43,perc of people with symptoms getting sick,1400,792,76,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,45,41,16,0,0,0,0,0,128,0,-1--1--1,,1|(879,781)|
+10,47,"when-symptoms-if-I",849,661,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,48,47,6,0,0,0,0,0,128,0,-1--1--1,,1|(769,640)|
+1,49,47,16,0,0,0,0,0,128,0,-1--1--1,,1|(915,715)|
+10,50,People getting slight symptoms,1288,324,63,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,51,People getting sick,884,77,59,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,52,"average-time-tobe-exposed",1160,161,40,32,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,53,52,50,0,0,0,0,0,0,0,-1--1--1,,1|(1224,241)|
+10,54,Exposed,1076,185,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,55,54,50,0,0,0,0,0,0,0,-1--1--1,,1|(1169,245)|
+10,56,Exposing,1057,276,39,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,57,56,50,0,0,0,0,0,0,0,-1--1--1,,1|(1153,293)|
+10,58,"mild-asymptomatic",1453,412,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,59,58,50,0,0,0,0,0,0,0,-1--1--1,,1|(1375,368)|
+1,60,15,50,0,0,0,0,0,0,0,-1--1--1,,1|(1109,316)|
+1,61,52,51,0,0,0,0,0,0,0,-1--1--1,,1|(1028,120)|
+1,62,54,51,0,0,0,0,0,0,0,-1--1--1,,1|(988,136)|
+1,63,56,51,0,0,0,0,0,0,0,-1--1--1,,1|(975,180)|
+1,64,15,51,1,0,0,0,0,0,0,-1--1--1,,1|(901,228)|
+10,65,People getting sick,721,833,52,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,66,65,6,0,0,0,0,0,128,0,-1--1--1,,1|(692,725)|
+1,67,65,16,1,0,0,0,0,128,0,-1--1--1,,1|(880,837)|
+10,68,perc of people with symptoms getting sick,1228,96,72,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,69,51,68,0,0,0,0,0,0,0,-1--1--1,,1|(1044,84)|
+1,70,50,68,0,0,0,0,0,0,0,-1--1--1,,1|(1259,216)|
+10,71,Chance of being informed on becomming symptomatic,1324,40,93,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,72,71,51,1,0,0,0,0,128,0,-1--1--1,,1|(988,48)|
+1,73,71,50,1,0,0,0,0,128,0,-1--1--1,,1|(1352,169)|
+10,74,Getting informed of infection,1465,8,68,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,75,74,51,1,0,0,0,0,128,0,-1--1--1,,1|(981,1)|
+1,76,74,50,1,0,0,0,0,128,0,-1--1--1,,1|(1465,88)|
+10,77,"when-symptoms-if-I",1565,-20,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,78,77,51,1,0,0,0,0,64,0,-1--1--1,,1|(936,-35)|
+1,79,77,50,1,0,0,0,0,128,0,-1--1--1,,1|(1569,65)|
+10,80,"self-isolating",813,733,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,81,80,6,0,0,0,0,0,128,0,-1--1--1,,1|(744,677)|
+1,82,80,16,0,0,0,0,0,128,0,-1--1--1,,1|(893,752)|
+10,87,initial perc of infsymp hosp,893,619,47,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128,0,0,0,0,0,0
+1,88,87,6,0,0,0,0,0,128,0,-1--1--1,,1|(787,612)|
+1,89,87,16,0,0,0,0,0,128,0,-1--1--1,,1|(940,692)|
+10,90,initial perc of infsymp recover,940,584,56,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128,0,0,0,0,0,0
+1,91,90,16,0,0,0,0,0,128,0,-1--1--1,,1|(963,673)|
+10,92,initial perc of infsymp dead,943,683,43,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,93,87,92,0,0,0,0,0,128,0,-1--1--1,,1|(913,645)|
+1,94,90,92,0,0,0,0,0,128,0,-1--1--1,,1|(940,628)|
+1,95,92,16,0,0,0,0,0,128,0,-1--1--1,,1|(963,723)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Buttons
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,70,0
+10,1,"prop-move-long",172,-181,52,11,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,"prop-move-short",163,-223,56,11,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,"beds-H",345,-332,25,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,"beds-C",425,-320,25,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,"blocked-bed-effect?",355,-268,40,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,6,"death-no-bed",360,-203,44,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,"isolation-efficacy",671,240,53,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,"isolate-inform?",961,237,47,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,"mild-asymptomatic",952,287,59,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,"intervention-duration",1032,152,40,20,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,"trigger-level",1100,88,40,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,"trigger-type",928,73,37,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,"distancing-option",881,-120,56,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,"distancing-reduction",861,-80,40,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,"high-risk-shielding?",1015,-136,40,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,"HR-shield-duration",1005,-93,40,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,17,"move-reduction-long",1240,12,40,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,18,"move-reduction-short",1247,-53,40,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,19,"vaccinate-to-level",665,316,56,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,20,"vaccine-efficacy-I",656,428,56,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,21,"vaccine-efficacy-S",660,376,60,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,22,"self-isolators",1060,344,40,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,23,"SI-isolation-duration",1065,400,40,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,24,informers,1208,339,32,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,25,"found-and-isolate",1240,383,55,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,26,"IC-isolation-duration",1220,436,40,19,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,27,"prob-InfDeath",96,552,48,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,28,"prob-InfHosp",95,583,44,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,29,"prob-HospDeath",104,609,56,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,30,"prob-HospCrit",97,635,48,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,31,"prob-CritDeath",101,663,49,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,32,"immune-mild",92,720,41,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,33,"immune-loss-when",107,772,59,11,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,34,"immune-severe",96,744,48,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,35,"when-symptoms-if-I",105,823,65,17,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,36,"max-presymptomatic",107,848,68,16,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,37,"use-age-mixing?",740,507,51,11,8,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,38,"prop-risk",927,583,31,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,39,"relative-risk",725,581,40,11,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,40,"transmission-parameter",135,-277,40,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,41,0,344,-28,335,133,3,188,0,0,1,0,0,0,0,0,0,0,0,0
+Epidemic
+10,42,"prop-high-risk",732,545,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,43,42,38,1,0,0,0,0,128,0,-1--1--1,,1|(877,568)|
+///---\\\
+:GRAPH Epidemic
+:TITLE Epidemic
+:NO-LEGEND 1
+:SCALE
+:VAR "prevalence-all"
+:VAR "prevalence-I"
+:VAR incidence
+:L<%^E!@
+1:model_output1.vdfx
+4:Time
+5:initial perc of infsymp dead[Age groups,Isolation,"Risk-type","vacc-type"]
+6:"1"
+6:"Low-risk"
+6:"non-vaccinated"
+6:not isolated
+9:Current1
+19:60,1
+24:100
+25:200
+26:200
+57:1
+54:0
+55:0
+82:0
+86:0
+59:0
+56:0
+58:0
+71:0
+44:65001
+46:0
+45:5
+49:0
+50:1
+51:
+52:
+53:
+43:Current
+47:Current
+48:
+22:Days=Day
+18:Vensim_model_2.vsc
+20:oefen.lst
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:4
+41:0
+95:0
+96:0
+77:0
+78:0
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:Current
